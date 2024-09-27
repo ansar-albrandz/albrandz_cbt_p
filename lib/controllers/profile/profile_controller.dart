@@ -1,4 +1,3 @@
-import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
 import 'package:albrandz_cbt_p/models/profile/create_profile_model.dart';
 import 'package:albrandz_cbt_p/models/profile/profile_response_model.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
@@ -7,52 +6,46 @@ import '../api/api_controller.dart';
 
 class ProfileController extends GetxController {
   final ApiController _apiController =
-      ApiController(); // Using ApiController for API calls
+      ApiController();
 
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var profileData = ProfilePersonalData().obs;
   var isProfileCreated = false.obs;
   var isProfileUpdated = false.obs;
-  var isProfileLoading = true.obs;
+  var isProfileLoading = false.obs;
 
   @override
   onInit() {
     super.onInit();
-    getProfile();
+    // getProfile();
   }
 
   Future<void> getProfile() async {
-    var token = await UserLocalDataController().getLoginToken();
-    // var a = "bba567dc4a27623ab4f93b47f7e7330a9b9ce06ca5a9b7520503c2aaef246555";
-    var headers = {
-      "Authorization": "Bearer $token"
-    };
     try {
-      final response = await _apiController.get(getProfileEndPoint,headers: headers);
+      final response = await _apiController.get(getProfileEndPoint,isHeader: true);
       var data = ProfileResponseModel.fromJson(response);
       if (response != null && data.response?.status == 'success') {
         profileData.value = data.body?.personal ?? ProfilePersonalData();
-        isProfileLoading(false);
+        isProfileLoading(true);
+        isLoading(true);
       } else {
         isProfileLoading(false);
+        isLoading(false);
         Get.snackbar(
             'Error', data.response?.message ?? 'Failed to fetch profile');
       }
     } catch (error) {
       isProfileLoading(false);
+      isLoading(false);
       Get.snackbar('Error', 'An error occurred: $error');
-    } finally {
-      isProfileLoading(false);
     }
   }
 
   Future<void> createProfile(CreateProfileModel profileDetails) async {
     isLoading(true);
-    var getToken = await UserLocalDataController().getLoginToken();
-    var token = "Bearer $getToken";
     try {
       final response = await _apiController.post(createProfileEndPoint,
-          data: profileDetails.toJson(), headers: {"Authorization": token});
+          data: profileDetails.toJson(), isHeader: true);
       if (response != null && response['response']['status'] == 'success') {
         isProfileCreated(true);
         Get.snackbar('Success', 'Profile created successfully');

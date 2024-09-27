@@ -32,49 +32,61 @@ class _LoginScreenState extends State<LoginScreen> {
     var width = context.fullWidth;
     var height = context.fullHeight;
     return Scaffold(
-      body: AppImageView.backGroundAssetImage(path: loginImagePath, child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
-        child: SingleChildScrollView(
-          child: Form(
-            key: loginKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                30.height,
-                view.titleView(LOGIN),
-                20.height,
-                view.mobileTextView(ENTER_MOBILE),
-                5.height,
-                view.mobileWithCountryCod4Field(mobileController,onSelected: (code){
-                  setState(() {
-                    countryCode = code.countryCode;
-                    countryFlag = code.flagEmoji;
-                  });
-                }),
-                30.height,
-                ButtonWidgets().appButtonFillView(CONTINUE,onTap: (){
-                  if(loginKey.currentState!.validate()){
-                    getUserOTP();
-                  }
-                },width: width),
-                20.height,
-                SizedBox(
-                    width: width,
-                    height: 25,
-                    child: view.orLineView()),
-                20.height,
-                ButtonWidgets().appButtonFillOutView(LOGIN_WITH_PIN,onTap: (){
-                  if(loginKey.currentState!.validate()){
-                    verifyMobile();
-                  }
-                },width: width),
-                // 20.height,
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: height*.52,
+              width: width,
+              decoration: const BoxDecoration(
+                image: DecorationImage(image: AssetImage(loginImagePath),fit: BoxFit.fill),
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Form(
+                key: loginKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    30.height,
+                    view.titleView(LOGIN),
+                    20.height,
+                    view.mobileTextView(ENTER_MOBILE),
+                    5.height,
+                    view.mobileWithCountryCod4Field(mobileController,onSelected: (code){
+                      setState(() {
+                        countryCode = "+${code.phoneCode}";
+                        countryFlag = code.flagEmoji;
+                      });
+                    }),
+                    30.height,
+                    ButtonWidgets().appButtonFillView(CONTINUE,onTap: (){
+                      if(loginKey.currentState!.validate()){
+                        getUserOTP();
+                      }
+                    },width: width),
+                    20.height,
+                    SizedBox(
+                        width: width,
+                        height: 25,
+                        child: view.orLineView()),
+                    20.height,
+                    ButtonWidgets().appButtonFillOutView(LOGIN_WITH_PIN,onTap: (){
+                      if(loginKey.currentState!.validate()){
+                        verifyMobile();
+                      }
+                    },width: width),
+                    // 20.height,
+                  ],
+                ),
+              ),
+            ),
+            10.height
+          ],
         ),
-      ), size: Size(width,height*.52)),
+      ),
     );
   }
 

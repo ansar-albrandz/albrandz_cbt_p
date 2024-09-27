@@ -1,9 +1,7 @@
-
-
-//const BASE_URL = "https://cba.albrandz.in/cba/api/passenger/";
 const BASE_URL = "https://cabike.in/";
 const MID_URL = "cba/api/passenger/";
 const FULL_URL = BASE_URL+MID_URL;
+
 // otp end points
 const getOTPEndPoint = "login/otp";
 const verifyOTPEndPoint = "verify/otp";

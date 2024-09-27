@@ -1,7 +1,11 @@
 import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
+import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
+import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/create_profile_screen.dart';
+import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
@@ -32,18 +36,21 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     var view = LoginWidgets(context: context);
     var width = context.fullWidth;
     var height = context.fullHeight;
-    var replacedMobile = "${_authController.countryCode.value} "+ _authController.mobileNumber.value.replaceItems(8);
-
+    var replacedMobile = "${_authController.countryCode.value}-" +
+        _authController.mobileNumber.value.replaceItems(8);
     return Scaffold(
       body: Stack(
         children: [
-          AppImageView.backGroundAssetImage(
-              path: verifyOTPImagePath,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Form(
-                    key: otpKey,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                AppImageView.screenBackgroundImageImage(
+                    path: verifyOTPImagePath,
+                    size: Size(width, height * .52)),
+                Form(
+                  key: otpKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical:verticalPadding ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -56,24 +63,25 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         view.otpFieldsView(otpController),
                         30.height,
                         ButtonWidgets().appButtonFillView(CONTINUE, onTap: () {
-                          if(otpKey.currentState!.validate()){
+                          if (otpKey.currentState!.validate()) {
                             verifyOTP(context);
                           }
-                          // _validateNumber(context);
                         }, width: width),
                         30.height,
-                        ResendButtonView(
-                          onPressed: (){
-                            onResendPressed();
-                          },
+                        Center(
+                          child: ResendButtonView(
+                            onPressed: () {
+                              onResendPressed();
+                            },
+                          ),
                         ),
-                        50.height,
                       ],
                     ),
                   ),
-                ),
-              ),
-              size: Size(width, height * .52)),
+                )
+              ],
+            ),
+          ),
           Positioned(
             top: 20,
             left: 20,
@@ -95,13 +103,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   verifyOTP(BuildContext context) async {
+    var profileController = Get.put(ProfileController());
     LoaderBuilder(context: context).showFullScreenLoader();
     await _authController.verifyOTP(
         _authController.countryCode.value + _authController.mobileNumber.value,
         otpController.text.trim());
     LoaderBuilder(context: context).dismissLoader();
     if (_authController.isOTPVerified.value) {
-      Get.to(const CreateProfileScreen());
+      await profileController.getProfile();
+     if(!profileController.isProfileLoading.value){
+       Get.to(const CreateProfileScreen());
+     }else{
+       await UserLocalDataController().storeLogInStatus();
+       context.toNextRemove(ProfileViewScreen());
+     }
     }
   }
 }

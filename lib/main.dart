@@ -1,3 +1,4 @@
+import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/splash/splash_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/app_theme.dart';
 import 'package:flutter/material.dart';

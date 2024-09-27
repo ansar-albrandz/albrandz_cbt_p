@@ -21,26 +21,24 @@ class ProfileSuccessScreen extends StatelessWidget {
     var width = context.fullWidth;
 
     return Scaffold(
-      body: AppImageView.backGroundAssetImage(path: submittedSuccessImagePath, child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            30.height,
-            Lottie.asset('assets/lotties/done.json',height: 100,width: 100,fit: BoxFit.cover),
-            20.height,
-            view.fieldTitleTextView(
-                "Your Profile has been submitted successfully!"),
-            (height * .20).height,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: ButtonWidgets().appButtonFillView(NEXT, onTap: () {
-                context.toNext(ProfileViewScreen());
-              }, width: width),
-            ),
-            20.height,
-          ],
-        ),
-      ), size: Size(width, height*.52)),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          AppImageView.screenBackgroundImageImage(path: submittedSuccessImagePath, size: Size(width, height*.50)),
+          Lottie.asset(successAnimationPath,height: 100,width: 100,fit: BoxFit.cover),
+          20.height,
+          view.fieldTitleTextView(
+              CREATE_PROFILE_SUCCESS_MESSAGE),
+          (height * .20).height,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: ButtonWidgets().appButtonFillView(NEXT, onTap: () {
+              context.toNext(ProfileViewScreen());
+            }, width: width),
+          ),
+          20.height,
+        ],
+      ),
     );
   }
 }

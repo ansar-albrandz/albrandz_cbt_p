@@ -1,6 +1,9 @@
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/profile_view_widgets.dart';
+import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/button_widgets.dart';
@@ -8,30 +11,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ProfileViewScreen extends StatelessWidget {
-    ProfileViewScreen({super.key});
+class ProfileViewScreen extends StatefulWidget {
+    const ProfileViewScreen({super.key});
 
+  @override
+  State<ProfileViewScreen> createState() => _ProfileViewScreenState();
+}
+
+class _ProfileViewScreenState extends State<ProfileViewScreen> {
    var profileController = Get.put(ProfileController());
+
+   @override
+  void initState() {
+    super.initState();
+    profileController.getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     var view = ProfileViewWidgets(context: context);
     var height = context.fullHeight;
     var width = context.fullWidth;
-
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-              child: Image.asset(
-                profileImagePath,
-                height: height,
-                width: width,
-                fit: BoxFit.fill,
-              )),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+    return Obx(()=>profileController.isLoading.value == true?Scaffold(
+      body: Container(
+        height: height,
+        width: width,
+        decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage(profileImagePath),fit: BoxFit.fill),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
               child: Obx(()=>Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +70,7 @@ class ProfileViewScreen extends StatelessWidget {
                       title: profileController.profileData.value.pin??"NA", leadingIcon: passwordPinIcon),
                   view.lineView(),
                   view.infoFieldView(
-                      title: 'Add Card',
+                      title: ADD_CARD,
                       leadingIcon: creditCardIcon,
                       trailingButton: IconButton(
                           onPressed: () {},
@@ -71,14 +81,13 @@ class ProfileViewScreen extends StatelessWidget {
                   view.lineView(),
                   40.height,
                   ButtonWidgets()
-                      .appButtonFillView("Ok", width: width),
+                      .appButtonFillView(OK, width: width),
                   50.height
                 ],
               ),)
-            ),
-          )
-        ],
+          ),
+        ),
       ),
-    );
+    ):FullScreenLoaderView(path: null));
   }
 }

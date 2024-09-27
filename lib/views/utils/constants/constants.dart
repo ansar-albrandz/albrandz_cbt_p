@@ -10,6 +10,9 @@ const STATUS = "Status";
 const FEMALE = "Female";
 const MALE = "Male";
 const OTHERS = "Others";
+const SUCCESS_s = "success";
+const FAILED_s = "failed";
+const TOKEN_ERROR = "Token Error.";
 
 const SUBMIT = "Submit";
 const NEXT = "Next";
@@ -23,6 +26,9 @@ const OR = "Or";
 const OR_c = "OR";
 const OR_s = "or";
 const AND_s = "and";
+const OK = "Ok";
+const ADD_CARD = "Add Card";
+const ADD_NEW_CARD = "Add new card";
 
 // service
 
@@ -44,6 +50,7 @@ const FORGET_PIN = "Forgot PIN";
 const LOGOUT_MESSAGE = "Are you sure? Do you want to logout now?";
 const LET_GET_RIDES = "Let's get rides";
 const REMEMBER_LOGIN = "Remember Login";
+const CREATE_PROFILE_SUCCESS_MESSAGE = "Your Profile has been created successfully!";
 // country code
 
 const INITAL_COUNTRY_CODE = "+91";

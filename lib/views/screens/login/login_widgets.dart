@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:albrandz_cbt_p/views/utils/builders/app_country_code_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
@@ -10,7 +9,6 @@ import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/widget_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
@@ -112,7 +110,7 @@ class LoginWidgets {
         children: [
           const Divider(
             height: 3,
-            thickness: 2,
+            thickness: 1,
           ).expanded(),
           10.width,
           const Text(
@@ -121,28 +119,24 @@ class LoginWidgets {
           ),
           10.width,
           const Divider(
-            thickness: 2,
+            thickness: 1,
           ).expanded()
         ],
       );
 
-  bool checked = false;
   Widget rememberLoginView(bool value,{required void Function(bool?) onChanged}) {
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return Row(
-          children: [
-            SizedBox(
-              height: 20,
-              width: 20,
-              child: Checkbox(
-                  value: value, onChanged: onChanged),
-            ),
-            5.width,
-            Text(REMEMBER_LOGIN)
-          ],
-        );
-      },
+    return Row(
+      children: [
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: Checkbox(
+              side: const BorderSide(color: disableBorderColor,width: defaultBorderWidth),
+              value: value, onChanged: onChanged),
+        ),
+        5.width,
+        const Text(REMEMBER_LOGIN)
+      ],
     );
   }
 }

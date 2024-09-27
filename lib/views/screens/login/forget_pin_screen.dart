@@ -1,5 +1,7 @@
 import 'package:albrandz_cbt_p/controllers/auth/login_with_pin_controller.dart';
+import 'package:albrandz_cbt_p/views/screens/login/login_with_pin_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
@@ -38,11 +40,12 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          AppImageView.backGroundAssetImage(
-              path: verifyOTPImagePath,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                AppImageView.screenBackgroundImageImage(path: verifyOTPImagePath, size: Size(width, height * .50)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
                   child: Form(
                     key: forgetKey,
                     child: Column(
@@ -72,13 +75,13 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
                           }
                           // _validateNumber(context);
                         }, width: width),
-                        50.height,
                       ],
                     ),
                   ),
-                ),
-              ),
-              size: Size(width, height * .52)),
+                )
+              ],
+            ),
+          ),
           Positioned(
             top: 20,
             left: 20,
@@ -93,7 +96,7 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
     setState(() {});
     otpController.clear();
     LoaderBuilder(context: context).showFullScreenLoader();
-    await _authController.resendOTP(
+    await _pinController.resendPin(
         _authController.countryCode.value + _authController.mobileNumber.value);
     LoaderBuilder(context: context).dismissLoader();
   }
@@ -105,7 +108,7 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
         otpController.text.trim(),pinController.text.trim());
     LoaderBuilder(context: context).dismissLoader();
     if (_pinController.resentPinSuccess.value) {
-      context.toNextRemove( ProfileViewScreen());
+      context.toNextRemove(LoginWithPinScreen());
     }
   }
 }

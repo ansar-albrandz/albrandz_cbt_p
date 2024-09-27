@@ -1,7 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
+import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
+import 'package:albrandz_cbt_p/models/api/api_response_model.dart';
+import 'package:albrandz_cbt_p/views/screens/login/login_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getPackage;
 
 import '../../views/utils/constants/constants.dart'; // Assuming this contains BASE_URL
@@ -9,19 +12,24 @@ import '../../views/utils/constants/constants.dart'; // Assuming this contains B
 class ApiController {
   final Dio _dio = Dio();
 
-  var headers = {
-    AUTHORIZATION:"Bearer 5040371bd6065ea0074643d096c74f6277b8f673245cf417093535f774974bd5"
-  };
+  _getHeaders()async{
+    var token = await UserLocalDataController().getLoginToken();
+    return {
+      AUTHORIZATION: "Bearer $token"
+    };
+  }
+  Map<String, dynamic>? get _defaultHeaders => {};
 
 
   // GET request
-  Future<dynamic> get(String endpoint, {Map<String, dynamic>? queryParams, Map<String, dynamic>? headers}) async {
+  Future<dynamic> get(String endpoint, {Map<String, dynamic>? queryParams, bool isHeader = false}) async {
     try {
       final response = await _dio.get(
         FULL_URL + endpoint,
         queryParameters: queryParams,
-        options: Options(headers: headers),
+        options: Options(headers: isHeader?await _getHeaders():_defaultHeaders),
       );
+      checkTokenStatus(response);
       return handleResponse(response);
     } on DioException catch (e) {
       return handleError(e);
@@ -29,13 +37,14 @@ class ApiController {
   }
 
   // POST request
-  Future<dynamic> post(String endpoint, {required Map<String, dynamic> data, Map<String, dynamic>? headers}) async {
+  Future<dynamic> post(String endpoint, {required Map<String, dynamic> data, bool isHeader = false}) async {
     try {
       final response = await _dio.post(
         FULL_URL + endpoint,
         data: data,
-        options: Options(headers: headers),
+        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
       );
+      checkTokenStatus(response);
       return handleResponse(response);
     } on DioException catch (e) {
       return handleError(e);
@@ -43,13 +52,14 @@ class ApiController {
   }
 
   // PUT request
-  Future<dynamic> put(String endpoint, {required Map<String, dynamic> data, Map<String, dynamic>? headers}) async {
+  Future<dynamic> put(String endpoint, {required Map<String, dynamic> data, bool isHeader = false}) async {
     try {
       final response = await _dio.put(
         FULL_URL + endpoint,
         data: data,
-        options: Options(headers: headers),
+        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
       );
+      checkTokenStatus(response);
       return handleResponse(response);
     } on DioException catch (e) {
       return handleError(e);
@@ -57,13 +67,14 @@ class ApiController {
   }
 
   // DELETE request
-  Future<dynamic> delete(String endpoint, {required Map<String, dynamic> data, Map<String, dynamic>? headers}) async {
+  Future<dynamic> delete(String endpoint, {required Map<String, dynamic> data, bool isHeader = false}) async {
     try {
       final response = await _dio.delete(
         FULL_URL + endpoint,
         data: data,
-        options: Options(headers: headers),
+        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
       );
+      checkTokenStatus(response);
       return handleResponse(response);
     } on DioException catch (e) {
       return handleError(e);
@@ -71,7 +82,7 @@ class ApiController {
   }
 
   // Upload file
-  Future<dynamic> uploadFile(String endpoint, File file, {Map<String, dynamic>? headers}) async {
+  Future<dynamic> uploadFile(String endpoint, File file, {bool isHeader = false}) async {
     try {
       FormData formData = FormData.fromMap({
         'file': await MultipartFile.fromFile(file.path, filename: file.path.split('/').last),
@@ -80,12 +91,12 @@ class ApiController {
       final response = await _dio.post(
         FULL_URL+endpoint,
         data: formData,
-        options: Options(headers: headers),
+        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
         onSendProgress: (int sent, int total) {
           print('Upload Progress: ${(sent / total) * 100}%');
         },
       );
-
+      checkTokenStatus(response);
       return handleResponse(response);
     } on DioException catch (e) {
       return handleError(e);
@@ -93,19 +104,19 @@ class ApiController {
   }
 
   // Method to download a file
-  Future<void> downloadFile(String endpoint, String savePath, {Map<String, dynamic>? headers}) async {
+  Future<void> downloadFile(String endpoint, String savePath, {bool isHeader = false}) async {
     try {
       final response = await _dio.download(
         FULL_URL+endpoint,
         savePath,
-        options: Options(headers: headers),
+        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
         onReceiveProgress: (received, total) {
           if (total != -1) {
             print('Download Progress: ${(received / total * 100).toStringAsFixed(0)}%');
           }
         },
       );
-
+      checkTokenStatus(response);
       if (response.statusCode == 200) {
         print('File downloaded successfully!');
       } else {
@@ -123,7 +134,6 @@ class ApiController {
       getPackage.Get.snackbar('Error', 'Request failed with status code: ${e.response?.statusCode}');
       return handleResponse(e.response!);
     } else {
-      // Other errors, like no internet connection
       if (e.error is SocketException) {
         print('No Internet connection');
         getPackage.Get.snackbar('Error', 'No Internet connection');
@@ -165,5 +175,12 @@ class ApiController {
         getPackage.Get.snackbar('Error', 'Something went wrong');
     }
     return null;
+  }
+
+  checkTokenStatus(Response<dynamic> response){
+    var data = ApiResponseModel.fromJson(response.data as Map<String,dynamic>);
+    if(data.response?.status == FAILED_s && data.response?.message == TOKEN_ERROR){
+      getPackage.Get.offUntil(getPackage.GetPageRoute(page: ()=>const LoginScreen()),ModalRoute.withName('/login'));
+    }
   }
 }

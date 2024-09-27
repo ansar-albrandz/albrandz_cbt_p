@@ -4,20 +4,35 @@ import 'package:flutter/material.dart';
 import '../constants/size_constants.dart';
 
 class AppImageView {
-  static Widget backGroundAssetImage(
+  // BuildContext context;
+  // AppImageView({required this.context});
+
+ static Widget backGroundAssetImage(
       {required String path, required Widget child,required Size size}) {
-    return Column(
-      children: [
-        Container(
-          height: size.height,
-          width: size.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(path),fit: BoxFit.fill),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: size.height,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(path),fit: BoxFit.fill),
+            ),
           ),
-        ),
-        Expanded(child: child)
-      ],
+          child
+        ],
+      ),
     );
+  }
+
+  static screenBackgroundImageImage({required String path,required Size size}){
+   return Container(
+     height: size.height,
+     width: size.width,
+     decoration: BoxDecoration(
+       image: DecorationImage(image: AssetImage(path),fit: BoxFit.fill),
+     ),
+   );
   }
 
   static appLogoView({String imagePath = appLogoPath}){

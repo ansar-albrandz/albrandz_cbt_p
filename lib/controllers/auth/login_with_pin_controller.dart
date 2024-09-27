@@ -45,7 +45,6 @@ class LoginWithPinController extends GetxController {
     isLoading(true);
     errorMessage.value = '';
     verifySuccess(false);
-
     try {
       final response = await _apiController.post(
         verifyPINEndPoint,
@@ -72,7 +71,7 @@ class LoginWithPinController extends GetxController {
   }
 
   // Method to resend PIN
-  Future<void> resendPin(String mobile, String otp) async {
+  Future<void> resendPin(String mobile) async {
     isLoading(true);
     errorMessage.value = '';
     resentPinSuccess(false);
@@ -80,7 +79,7 @@ class LoginWithPinController extends GetxController {
     try {
       final response = await _apiController.put(
         resendPINEndPoint,
-        data: {'mobile': mobile, 'otp': otp},
+        data: {'mobile': mobile},
       );
 
       if (response != null && response['response']['status'] == 'success') {

@@ -2,6 +2,7 @@ import 'package:albrandz_cbt_p/views/utils/builders/app_country_code_builder.dar
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/text_filed_widgets.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/gestures.dart';
@@ -74,6 +75,7 @@ class ProfileWidgets {
               width: 20,
               child: Checkbox(
                   value: value,
+                  side: const BorderSide(color: disableBorderColor,width: defaultBorderWidth),
                   onChanged: onChanged),
             ),
             10.width,

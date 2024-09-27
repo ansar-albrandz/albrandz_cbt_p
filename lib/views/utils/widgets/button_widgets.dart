@@ -3,13 +3,12 @@ import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../borders/app_border_radius.dart';
 
 class ButtonWidgets {
 
-  Widget introButtonView(String title, {Size? size,void Function()? onTap}){
+  Widget introButtonView(String title, {double? width,double height = defaultHeightOfButton,void Function()? onTap}){
     return Card(
       shape: _buttonBorderRadius(),
       margin: EdgeInsets.zero,
@@ -18,8 +17,8 @@ class ButtonWidgets {
         onTap: onTap,
         borderRadius: AppBorderRadius.circular(),
         child: SizedBox(
-          height: size?.height??60,
-          width: size?.width ?? 200,
+          height: height,
+          width: width ?? 200,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

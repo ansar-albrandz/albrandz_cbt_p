@@ -3,6 +3,7 @@ import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart'
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/models/profile/create_profile_model.dart';
 import 'package:albrandz_cbt_p/views/screens/home/home_screen.dart';
+import 'package:albrandz_cbt_p/views/screens/login/forget_pin_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/login/login_widgets.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/profile_widgets.dart';
@@ -15,7 +16,6 @@ import 'package:albrandz_cbt_p/views/utils/extensions/date_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/constants/constants.dart';
@@ -42,7 +42,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   @override
   void initState() {
     super.initState();
-    init();
+   // init();
   }
 
   init() {
@@ -61,18 +61,17 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     var height = context.fullHeight;
     var width = context.fullWidth;
     return Scaffold(
-      body: AppImageView.backGroundAssetImage(
-          path: createProfileImagePath,
-          child: Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(horizontalPadding),
+      body: SingleChildScrollView(
+          child: Column(
+            children: [
+              AppImageView.screenBackgroundImageImage(path: createProfileImagePath, size: Size(width, height * .25)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
                 child: Form(
                   key: createKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      20.height,
                       view.titleView(CREATE_PROFILE),
                       20.height,
                       view.fieldTitleTextView(
@@ -83,7 +82,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                           keyBoard: TextInputType.text,
                           icon: profileNameIcon,
                           validator: (text) =>
-                              text!.isEmpty ? "This field is required" : null),
+                          text!.isEmpty ? "This field is required" : null),
                       16.height,
                       view.fieldTitleTextView(MOBILE_TITLE),
                       5.height,
@@ -107,6 +106,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                   onTap: () {
                                     showCalenderView();
                                   },
+                                  validator: (text)=> text?.defaultValidator(),
                                   icon: dobIcon,
                                   onlyRead: true,
                                   keyBoard: TextInputType.datetime,
@@ -124,10 +124,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                 view.appDropDownView(
                                     ["Male", "Female", "Other"],
                                     onChanged: (text) {
-                                  setState(() {
-                                    selectedGender = text;
-                                  });
-                                })
+                                      setState(() {
+                                        selectedGender = text;
+                                      });
+                                    })
                               ],
                             ),
                           ),
@@ -145,14 +145,13 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       ButtonWidgets().appButtonFillView(CONTINUE, onTap: () {
                         _validField();
                       }, width: width),
-                      50.height,
                     ],
                   ),
                 ),
               ),
-            ),
-          ),
-          size: Size(width, height * .25)),
+            ],
+          )
+      ),
     );
   }
 

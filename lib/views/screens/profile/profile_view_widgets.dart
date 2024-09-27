@@ -1,14 +1,13 @@
 import 'dart:io';
-
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../../../controllers/profile/take_image_controller.dart';
 import '../../utils/constants/constants.dart';
+import '../../utils/constants/size_constants.dart';
 
 class ProfileViewWidgets {
   BuildContext context;
@@ -24,16 +23,16 @@ class ProfileViewWidgets {
         alignment: Alignment.bottomRight,
         children: [
           Container(
-            height: 100,
-            width: 100,
+            height: profileImageSize,
+            width: profileImageSize,
             decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(50)),
+                color: Colors.grey.shade200, borderRadius: BorderRadius.circular(profileImageSize/2)),
             child: Obx((){
               var image = takeImageController.selectedImagePath.value;
               return image != ''?ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.file(File(image),fit: BoxFit.cover,color: Colors.black54,),
-              ):const Icon(Icons.person_outline,size: 80,);
+                child: Image.file(File(takeImageController.selectedImagePath.value),fit: BoxFit.cover,color: Colors.black54,),
+              ):const Icon(Icons.person_outline,size: 70,color: Colors.grey,);
             }),
           ),
           InkWell(
@@ -48,13 +47,6 @@ class ProfileViewWidgets {
           )
         ],
       ),
-    );
-  }
-
-  _circleImageView(String image){
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Image.file(File(image),fit: BoxFit.cover,color: Colors.black54,),
     );
   }
 

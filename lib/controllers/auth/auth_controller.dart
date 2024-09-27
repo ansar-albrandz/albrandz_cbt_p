@@ -22,6 +22,7 @@ class AuthController extends GetxController {
 
   Future<void> getOTP(String phoneNumber) async {
     isLoading(true);
+    print("Mobile: $phoneNumber");
     try {
       final response = await _apiController.post(
         getOTPEndPoint,
@@ -32,7 +33,7 @@ class AuthController extends GetxController {
         Get.snackbar('Success', 'OTP sent successfully');
       } else {
         otpSent(false);
-        Get.snackbar('Error', "Your mobile number is invalid");
+        Get.snackbar('Error', response['response']['message']);
       }
     } catch (error) {
       otpSent(false);

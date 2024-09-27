@@ -43,4 +43,5 @@ const passwordPinIcon = "assets/icons/pin password.svg";
 /// json paths
 
 const carAnimationPath = "assets/jsons/car.json";
+const successAnimationPath = 'assets/lotties/done.json';
 
