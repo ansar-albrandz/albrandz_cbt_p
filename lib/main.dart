@@ -1,5 +1,6 @@
 import 'package:albrandz_cbt_p/views/screens/intro/intro_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/app_theme.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Cabo Cab',
+      title: APP_NAME,
       theme: AppTheme().getAppTheme(),
       home:  IntroScreen(),
     );
