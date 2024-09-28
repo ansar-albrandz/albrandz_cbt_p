@@ -1,61 +1,121 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
+class ButtonWithAnimation extends StatefulWidget {
+  bool isAnimating = false;
+  final double height;
+  final double width;
+  final String title;
+  void Function()? onPressed;
+
+  ButtonWithAnimation({super.key,  required this.height, required this.width, required this.title, required this.onPressed, required this.isAnimating});
+  @override
+  ButtonWithAnimationState createState() => ButtonWithAnimationState();
 }
 
-class MyApp extends StatelessWidget {
+class ButtonWithAnimationState extends State<ButtonWithAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Button Loader Example')),
-        body: ButtonLoaderExample(),
-      ),
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
     );
+
+    // Tween to scale down from original size to a smaller size
+    _animation = Tween<double>(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
   }
-}
 
-class ButtonLoaderExample extends StatefulWidget {
   @override
-  _ButtonLoaderExampleState createState() => _ButtonLoaderExampleState();
-}
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
-class _ButtonLoaderExampleState extends State<ButtonLoaderExample> {
-  bool _isLoading = false;
-
-  void _onButtonClick() {
+  void _animateButton() {
+    widget.onPressed;
     setState(() {
-      _isLoading = true;
+      widget.isAnimating = true;
+    });
+    _controller.forward().then((_) {
+      // After animation completes, you can show the CircularProgressIndicator
+      setState(() {
+        widget.isAnimating = false; // Resetting state for UI updates
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        width: _isLoading ? 50 : 200, // Shrink width when loading
-        height: 50, // Fixed height
-        child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          child: _isLoading
-              ? SizedBox(
-            key: ValueKey(1), // Unique key for AnimatedSwitcher
-            width: 24,
-            height: 24,
-            child: CircularProgressIndicator(
-              strokeWidth: 2.5,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Button Animation to Progress Bar'),
+      ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Circular Progress Indicator
+          if (!widget.isAnimating) CircularProgressIndicator(),
+          // Animated button
+          ScaleTransition(
+            scale: Tween<double>(begin: 1.0, end: 0.0).animate(
+              CurvedAnimation(
+                parent: _controller,
+                curve: Curves.easeInOut,
+              ),
             ),
-          )
-              : ElevatedButton(
-            key: ValueKey(2), // Unique key for AnimatedSwitcher
-            onPressed: _isLoading ? null : _onButtonClick,
-            child: Text('Click Me'),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(widget.width, widget.height),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12), // Rectangular button with curved edges
+                ),
+                // padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              ),
+              onPressed: widget.isAnimating ? null : _animateButton,
+              child: Text(widget.title),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
+
+void main() {
+  runApp(MaterialApp(home: TestScreen()));
+}
+
+class TestScreen extends StatefulWidget {
+  const TestScreen({super.key});
+
+  @override
+  State<TestScreen> createState() => _TestScreenState();
+}
+
+class _TestScreenState extends State<TestScreen> {
+
+  bool isAnimating = false;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ButtonWithAnimation(height: 60, width: 200, title: "Show Animation", onPressed: () {
+        setState(() {
+          isAnimating = true;
+        });
+        Future.delayed(Duration(seconds: 3),(){
+          setState(() {
+            isAnimating = false;
+          });
+        });
+      }, isAnimating: isAnimating,),
+    );
+  }
+}
+
