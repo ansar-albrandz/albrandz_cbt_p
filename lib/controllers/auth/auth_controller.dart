@@ -1,6 +1,7 @@
 import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
 import 'package:albrandz_cbt_p/models/auth/otp_response_model.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:get/get.dart';
 
 import '../api/api_controller.dart';
@@ -13,7 +14,6 @@ class AuthController extends GetxController {
   var countryFlag = "".obs;
   var mobileNumber = "".obs;
 
-  // State variables
   var isLoading = false.obs;
   var otpSent = false.obs;
   var isLoggedOut = false.obs;
@@ -22,7 +22,6 @@ class AuthController extends GetxController {
 
   Future<void> getOTP(String phoneNumber) async {
     isLoading(true);
-    print("Mobile: $phoneNumber");
     try {
       final response = await _apiController.post(
         getOTPEndPoint,
@@ -30,14 +29,13 @@ class AuthController extends GetxController {
       );
       if (response != null && response['response']['status'] == 'success') {
         otpSent(true);
-        Get.snackbar('Success', 'OTP sent successfully');
       } else {
         otpSent(false);
-        Get.snackbar('Error', response['response']['message']);
+        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       otpSent(false);
-      Get.snackbar('Error', 'An error occurred: $error');
+      (error.toString()).showToast();
     } finally {
       isLoading(false);
     }
@@ -58,16 +56,14 @@ class AuthController extends GetxController {
         isOTPVerified(true);
         var token = response['header'];
         await UserLocalDataController().storeLoginToken(token);
-        Get.snackbar('Success', 'OTP verified successfully');
       } else {
         isOTPVerified(false);
-        Get.snackbar('Error', data.response?.message ?? 'Invalid OTP');
+        data.response?.message?.showToast();
       }
       isLoading(false);
     } catch (error) {
       isLoading(false);
       isOTPVerified(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     } finally {
       isLoading(false);
     }
@@ -82,14 +78,12 @@ class AuthController extends GetxController {
       );
       if (response != null && response['response']['status'] == 'success') {
         isOTPResend(true);
-        Get.snackbar('Success', 'OTP resent successfully');
+        (response['response']['message']).toString().showToast();
       } else {
         isOTPResend(false);
-        Get.snackbar('Error', response['response']['message'] ?? 'Failed to resend OTP');
       }
     } catch (error) {
       isOTPResend(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     } finally {
       isLoading(false);
     }
@@ -102,14 +96,12 @@ class AuthController extends GetxController {
       final response = await _apiController.get(logoutEndPoint);
       if (response != null && response['response']['status'] == 'success') {
         isLoggedOut(true);
-        Get.snackbar('Success', 'Logged out successfully');
+        (response['response']['message']).toString().showToast();
       } else {
         isLoggedOut(false);
-        Get.snackbar('Error', response['response']['message'] ?? 'Failed to log out');
       }
     } catch (error) {
       isLoggedOut(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     } finally {
       isLoading(false);
     }

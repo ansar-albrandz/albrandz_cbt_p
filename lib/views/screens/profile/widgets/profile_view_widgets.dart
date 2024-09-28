@@ -1,21 +1,23 @@
 import 'dart:io';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../controllers/profile/take_image_controller.dart';
-import '../../utils/constants/constants.dart';
-import '../../utils/constants/size_constants.dart';
+import '../../../../controllers/profile/take_image_controller.dart';
+import '../../../utils/constants/constants.dart';
+import '../../../utils/constants/size_constants.dart';
 
 class ProfileViewWidgets {
   BuildContext context;
 
   ProfileViewWidgets({required this.context});
 
-  profilePictureView({void Function()? onTap}) {
+  profilePictureView(bool isProfilePicAvailable,{void Function()? onTap}) {
     final takeImageController = Get.put(TakeImageController());
+    // final takeImageController = Get.put(TakeImageController());
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -29,9 +31,9 @@ class ProfileViewWidgets {
                 color: Colors.grey.shade200, borderRadius: BorderRadius.circular(profileImageSize/2)),
             child: Obx((){
               var image = takeImageController.selectedImagePath.value;
-              return image != ''?ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.file(File(takeImageController.selectedImagePath.value),fit: BoxFit.cover,color: Colors.black54,),
+              return image.isNotEmpty?CircleAvatar(
+                // borderRadius: BorderRadius.circular(50),
+                backgroundImage: isProfilePicAvailable?NetworkImage(FILE_PATH_URL+takeImageController.selectedImagePath.value,):FileImage(File(takeImageController.selectedImagePath.value),),
               ):const Icon(Icons.person_outline,size: 70,color: Colors.grey,);
             }),
           ),

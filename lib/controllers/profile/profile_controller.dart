@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:albrandz_cbt_p/models/profile/create_profile_model.dart';
-import 'package:albrandz_cbt_p/models/profile/profile_response_model.dart';
+import 'package:albrandz_cbt_p/models/profile/profile_model.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:get/get.dart';
 import '../api/api_controller.dart';
 
@@ -14,16 +17,11 @@ class ProfileController extends GetxController {
   var isProfileUpdated = false.obs;
   var isProfileLoading = false.obs;
 
-  @override
-  onInit() {
-    super.onInit();
-    // getProfile();
-  }
 
   Future<void> getProfile() async {
     try {
       final response = await _apiController.get(getProfileEndPoint,isHeader: true);
-      var data = ProfileResponseModel.fromJson(response);
+      var data = ProfileModel.fromJson(response);
       if (response != null && data.response?.status == 'success') {
         profileData.value = data.body?.personal ?? ProfilePersonalData();
         isProfileLoading(true);
@@ -31,13 +29,11 @@ class ProfileController extends GetxController {
       } else {
         isProfileLoading(false);
         isLoading(false);
-        Get.snackbar(
-            'Error', data.response?.message ?? 'Failed to fetch profile');
+        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       isProfileLoading(false);
       isLoading(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     }
   }
 
@@ -48,15 +44,13 @@ class ProfileController extends GetxController {
           data: profileDetails.toJson(), isHeader: true);
       if (response != null && response['response']['status'] == 'success') {
         isProfileCreated(true);
-        Get.snackbar('Success', 'Profile created successfully');
+        (response['response']['message']).toString().showToast();
       } else {
         isProfileCreated(false);
-        Get.snackbar('Error',
-            response['response']['message'] ?? 'Failed to create profile');
+
       }
     } catch (error) {
       isProfileCreated(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     } finally {
       isLoading(false);
     }
@@ -72,17 +66,78 @@ class ProfileController extends GetxController {
       if (response != null && response['response']['status'] == 'success') {
         profileData.value = response['response']['data'];
         isProfileUpdated(true);
-        Get.snackbar('Success', 'Profile updated successfully');
+        (response['response']['message']).toString().showToast();
       } else {
         isProfileUpdated(false);
-        Get.snackbar('Error',
-            response['response']['message'] ?? 'Failed to update profile');
       }
     } catch (error) {
       isProfileUpdated(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     } finally {
       isLoading(false);
+    }
+  }
+
+  var getImageStatus = false.obs;
+  var imageUri = ''.obs;
+
+  Future<void> getProfilePicture() async {
+    try {
+      final response = await _apiController.get(
+        getProfilePictureEndPoint,
+        isHeader: true,
+      );
+      if (response != null && response['response']['status'] == 'success') {
+        getImageStatus(true);
+        imageUri.value = response['body']['photo']['file'];
+        (response['response']['message']).toString().showToast();
+      } else {
+        getImageStatus(false);
+      }
+    } catch (error) {
+      getImageStatus(false);
+    }
+  }
+
+  var uploadImageStatus = false.obs;
+
+  Future<void> uploadProfilePicture(File file) async {
+    try {
+      final response = await _apiController.uploadFile(
+        uploadProfilePictureEndPoint,
+        file,
+        isHeader: true,
+      );
+      if (response != null && response['response']['status'] == 'success') {
+        uploadImageStatus(true);
+        Get.snackbar('Success', 'Image uploaded successfully');
+      } else {
+        uploadImageStatus(false);
+        Get.snackbar('Error',
+            response['response']['message'] ?? 'Failed to upload profile image');
+      }
+    } catch (error) {
+      uploadImageStatus(false);
+      Get.snackbar('Error', 'An error occurred: $error');
+    }
+  }
+
+  var updateImageStatus = false.obs;
+
+  Future<void> updateProfilePicture(File file) async {
+    try {
+      final response = await _apiController.updateFile(
+        uploadProfilePictureEndPoint,
+        file,
+        isHeader: true,
+      );
+      if (response != null && response['response']['status'] == 'success') {
+        updateImageStatus(true);
+        (response['response']['message']).toString().showToast();
+      } else {
+        updateImageStatus(false);
+      }
+    } catch (error) {
+      updateImageStatus(false);
     }
   }
 }

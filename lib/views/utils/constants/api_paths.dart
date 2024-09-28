@@ -2,6 +2,8 @@ const BASE_URL = "https://cabike.in/";
 const MID_URL = "cba/api/passenger/";
 const FULL_URL = BASE_URL+MID_URL;
 
+const FILE_PATH_URL = "https://cabike.in/cba/api";
+
 // otp end points
 const getOTPEndPoint = "login/otp";
 const verifyOTPEndPoint = "verify/otp";
@@ -22,3 +24,4 @@ const updateProfileEndPoint = "personal";
 const getProfileEndPoint = "personal";
 const uploadProfilePictureEndPoint = "photo";
 const updateProfilePictureEndPoint = "photo";
+const getProfilePictureEndPoint = "photo";

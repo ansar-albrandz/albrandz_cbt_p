@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:country_picker/country_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,125 +8,52 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Phone Number Input with Country Code',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: Scaffold(
-        appBar: AppBar(title: Text('Phone Number Input')),
-        body: PhoneNumberForm(),
+        appBar: AppBar(title: Text('Button Loader Example')),
+        body: ButtonLoaderExample(),
       ),
     );
   }
 }
 
-class PhoneNumberForm extends StatefulWidget {
+class ButtonLoaderExample extends StatefulWidget {
   @override
-  _PhoneNumberFormState createState() => _PhoneNumberFormState();
+  _ButtonLoaderExampleState createState() => _ButtonLoaderExampleState();
 }
 
-class _PhoneNumberFormState extends State<PhoneNumberForm> {
-  final _formKey = GlobalKey<FormState>();
-  String _phoneNumber = '';
-  String _countryCode = '+1'; // Default country code
-  String _countryFlag = '🇺🇸'; // Default country flag
+class _ButtonLoaderExampleState extends State<ButtonLoaderExample> {
+  bool _isLoading = false;
 
-  void _showCountryPicker() {
-    showCountryPicker(
-      context: context,
-      onSelect: (Country country) {
-        setState(() {
-          _countryCode = country.phoneCode; // Update selected country code
-          _countryFlag = country.flagEmoji; // Update selected country flag
-        });
-      },
-      favorite: ['US', 'IN'], // Add favorite countries
-      showPhoneCode: true, // Show phone code
-    );
+  void _onButtonClick() {
+    setState(() {
+      _isLoading = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey), // Full widget border
-                borderRadius: BorderRadius.circular(8.0), // Rounded corners
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min, // Minimize space occupied
-                children: <Widget>[
-                  // Country Picker with Flag and Code
-                  GestureDetector(
-                    onTap: _showCountryPicker,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0), // Add horizontal padding
-                      child: Row(
-                        children: [
-                          Text(
-                            _countryFlag, // Display country flag
-                            style: TextStyle(fontSize: 20), // Adjust font size for the flag
-                          ),
-                          SizedBox(width: 4), // Small space between flag and code
-                          Text(
-                            _countryCode,
-                            style: TextStyle(fontSize: 16), // Font size for country code
-                          ),
-                          SizedBox(width: 4), // Small space before the dropdown icon
-                          Icon(Icons.arrow_drop_down), // Dropdown icon
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Vertical Divider
-                  Container(
-                    height: 40, // Adjust height to fit the text field
-                    width: 1,
-                    color: Colors.grey, // Color of the divider
-                  ),
-
-                  // Phone number input
-                  Expanded(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none, // Removes the default text field border
-                        hintText: 'Phone Number',
-                        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 8), // Tighten padding
-                      ),
-                      keyboardType: TextInputType.phone,
-                      onChanged: (value) {
-                        _phoneNumber = value;
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
-              ),
+    return Center(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        width: _isLoading ? 50 : 200, // Shrink width when loading
+        height: 50, // Fixed height
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: _isLoading
+              ? SizedBox(
+            key: ValueKey(1), // Unique key for AnimatedSwitcher
+            width: 24,
+            height: 24,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.5,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
-
-            SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // Process the input
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ],
+          )
+              : ElevatedButton(
+            key: ValueKey(2), // Unique key for AnimatedSwitcher
+            onPressed: _isLoading ? null : _onButtonClick,
+            child: Text('Click Me'),
+          ),
         ),
       ),
     );

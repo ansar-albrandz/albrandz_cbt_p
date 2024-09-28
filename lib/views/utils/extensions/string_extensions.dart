@@ -8,7 +8,7 @@ extension StringExtensions on String {
 
   Future<bool?> showToast()=> Fluttertoast.showToast(msg: this);
 
-  replaceItems( int items,{String? replace,}){
+  replaceItems( {String? replace,int items = 8,}){
     return replaceRange(0, items, replace??'XXXXXXXX');
   }
 
@@ -42,8 +42,8 @@ extension StringExtensions on String {
 
   // static var phoneREg = RegExp("^([0|\+[0-9]{1,5})?([7-9][0-9]{9})");
 
-  static var pinRegExp = RegExp("[1-9][0-9]{5}");
-  static var phoneRegExp = RegExp("[1-9][0-9]{9}");
+  static var pinRegExp = RegExp("[0-9][0-9]{5}");
+  static var phoneRegExp = RegExp("[0-9][0-9]{9}");
   String? pinCodeValidator(String title){
     if(!pinRegExp.hasMatch(this)){
       return "Please enter a valid $title";

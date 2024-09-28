@@ -17,6 +17,7 @@ class AppTextStyle {
     return TextStyle(
       color: color?? semiBoldBlackTextColor,
       fontSize: textSize??semiBoldTextSize,
+      fontWeight: FontWeight.normal
     );
   }
 

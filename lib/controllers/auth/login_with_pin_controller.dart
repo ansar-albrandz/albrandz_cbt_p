@@ -1,4 +1,5 @@
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:get/get.dart';
 
 import '../api/api_controller.dart';
@@ -28,14 +29,12 @@ class LoginWithPinController extends GetxController {
 
       if (response != null && response['response']['status'] == 'success') {
         loginSuccess(true);
-        Get.snackbar('Success', 'Login successful');
+        (response['response']['message']).toString().showToast();
       } else {
         errorMessage.value = response['response']['message'] ?? 'Login failed';
-        Get.snackbar('Error', errorMessage.value);
       }
     } catch (error) {
       errorMessage.value = 'An error occurred: $error';
-      Get.snackbar('Error', errorMessage.value);
     } finally {
       isLoading(false);
     }
@@ -55,16 +54,14 @@ class LoginWithPinController extends GetxController {
         verifySuccess(true);
         var token = response['header'];
         await UserLocalDataController().storeLoginToken(token);
-        Get.snackbar('Success', 'Login successful');
+        (response['response']['message']).toString().showToast();
       } else {
         verifySuccess(false);
         errorMessage.value = response['response']['message'] ?? 'Login failed';
-        Get.snackbar('Error', errorMessage.value);
       }
     } catch (error) {
       verifySuccess(false);
       errorMessage.value = 'An error occurred: $error';
-      Get.snackbar('Error', errorMessage.value);
     } finally {
       isLoading(false);
     }
@@ -84,14 +81,12 @@ class LoginWithPinController extends GetxController {
 
       if (response != null && response['response']['status'] == 'success') {
         resentPinSuccess(true);
-        Get.snackbar('Success', 'PIN resent successfully');
+        (response['response']['message']).toString().showToast();
       } else {
         errorMessage.value = response['response']['message'] ?? 'Resending PIN failed';
-        Get.snackbar('Error', errorMessage.value);
       }
     } catch (error) {
       errorMessage.value = 'An error occurred: $error';
-      Get.snackbar('Error', errorMessage.value);
     } finally {
       isLoading(false);
     }
@@ -111,14 +106,12 @@ class LoginWithPinController extends GetxController {
 
       if (response != null && response['response']['status'] == 'success') {
         forgetPinSuccess(true);
-        Get.snackbar('Success', 'PIN reset instructions sent');
+        (response['response']['message']).toString().showToast();
       } else {
         errorMessage.value = response['response']['message'] ?? 'PIN reset failed';
-        Get.snackbar('Error', errorMessage.value);
       }
     } catch (error) {
       errorMessage.value = 'An error occurred: $error';
-      Get.snackbar('Error', errorMessage.value);
     } finally {
       isLoading(false);
     }
@@ -138,14 +131,12 @@ class LoginWithPinController extends GetxController {
 
       if (response != null && response['response']['status'] == 'success') {
         resentPinSuccess(true);
-        Get.snackbar('Success', 'PIN resent successfully with new PIN');
+        (response['response']['message']).toString().showToast();
       } else {
         errorMessage.value = response['response']['message'] ?? 'Resending new PIN failed';
-        Get.snackbar('Error', errorMessage.value);
       }
     } catch (error) {
       errorMessage.value = 'An error occurred: $error';
-      Get.snackbar('Error', errorMessage.value);
     } finally {
       isLoading(false);
     }

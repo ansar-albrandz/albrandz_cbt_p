@@ -1,6 +1,5 @@
 import 'package:albrandz_cbt_p/controllers/auth/login_with_pin_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/login/login_with_pin_screen.dart';
-import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
@@ -35,7 +34,7 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
     var view = LoginWidgets(context: context);
     var width = context.fullWidth;
     var height = context.fullHeight;
-    var replacedMobile = "${_authController.countryCode.value}-"+ _authController.mobileNumber.value.replaceItems(8);
+    var replacedMobile = "${_authController.countryCode.value}-"+ _authController.mobileNumber.value.replaceItems();
 
     return Scaffold(
       body: Stack(
@@ -43,7 +42,7 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                AppImageView.screenBackgroundImageImage(path: verifyOTPImagePath, size: Size(width, height * .50)),
+                AppImageView.screenBackgroundImageView(path: verifyOTPImagePath, size: Size(width, height * .50)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
                   child: Form(

@@ -1,3 +1,4 @@
+import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +14,7 @@ class TakeImageController extends GetxController {
     if (pickedImage != null) {
       selectedImagePath.value = pickedImage.path;
     } else {
-      Get.snackbar("Error", "No image selected");
+      "No image selected".showToast();
     }
   }
 
@@ -22,7 +23,7 @@ class TakeImageController extends GetxController {
     if (pickedImage != null) {
       selectedImagePath.value = pickedImage.path;
     } else {
-      Get.snackbar("Error", "No image selected");
+      "No image selected".showToast();
     }
   }
 }

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
-import 'package:albrandz_cbt_p/views/screens/profile/profile_view_widgets.dart';
+import 'package:albrandz_cbt_p/controllers/profile/take_image_controller.dart';
+import 'package:albrandz_cbt_p/views/screens/profile/widgets/profile_view_widgets.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
@@ -20,11 +23,17 @@ class ProfileViewScreen extends StatefulWidget {
 
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
    var profileController = Get.put(ProfileController());
+   var takeImageController = Get.put(TakeImageController());
 
    @override
   void initState() {
     super.initState();
-    profileController.getProfile();
+    init();
+  }
+
+  init()async{
+    await profileController.getProfilePicture();
+    await profileController.getProfile();
   }
 
   @override
@@ -47,9 +56,14 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   70.height,
-                  view.profilePictureView(onTap: (){
-                    view.showImageSelectionBottomSheet();
-                  }),
+                  InkWell(
+                    onTap: (){
+                      print("Profile picture clicked");
+                    },
+                    child: view.profilePictureView(profileController.imageUri.value.isNotEmpty?true:false,onTap: (){
+                      view.showImageSelectionBottomSheet();
+                    }),
+                  ),
                   view.userNameView(profileController.profileData.value.name??"NA"),
                   40.height,
                   view.infoFieldView(
@@ -80,14 +94,22 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                           ))),
                   view.lineView(),
                   40.height,
-                  ButtonWidgets()
-                      .appButtonFillView(OK, width: width),
+                  takeImageController.selectedImagePath.value.isEmpty?ButtonWidgets()
+                      .appButtonFillView(OK, width: width):ButtonWidgets()
+                      .appButtonFillView(UPLOAD, width: width,onTap: ()async{
+                        LoaderBuilder(context: context).showFullScreenLoader();
+                        await profileController.updateProfilePicture(File(takeImageController.selectedImagePath.value));
+                        LoaderBuilder(context: context).dismissLoader();
+                        if(profileController.uploadImageStatus.value){
+                          print("Image uploaded");
+                        }
+                  }),
                   50.height
                 ],
               ),)
           ),
         ),
       ),
-    ):FullScreenLoaderView(path: null));
+    ):const FullScreenLoaderView(path: null));
   }
 }

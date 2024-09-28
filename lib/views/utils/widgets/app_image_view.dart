@@ -25,7 +25,7 @@ class AppImageView {
     );
   }
 
-  static screenBackgroundImageImage({required String path,required Size size}){
+  static screenBackgroundImageView({required String path,required Size size}){
    return Container(
      height: size.height,
      width: size.width,

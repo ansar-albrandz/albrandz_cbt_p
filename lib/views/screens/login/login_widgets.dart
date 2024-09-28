@@ -38,15 +38,20 @@ class LoginWidgets {
 
   Widget otpFieldsView(TextEditingController pinController) {
     return Pinput(
+      errorTextStyle: const TextStyle(
+          fontWeight: FontWeight.normal, fontSize: normalTextSize-2,color: errorBorderColor),
       focusedPinTheme: PinTheme(
           height: otpFieldHeight,
           width: otpFieldWidth,
+          textStyle: const TextStyle(
+              fontWeight: FontWeight.normal, fontSize: boldTextSize),
           decoration: AppBoxDecoration.border(
               color: focusBorderColor, width: enableBorderWidth)),
       errorPinTheme: PinTheme(
           height: otpFieldHeight,
           width: otpFieldWidth,
-          textStyle: AppTextStyle.normalWhite(color: errorBorderColor,textSize: 10),
+          textStyle: const TextStyle(
+              fontWeight: FontWeight.normal, fontSize: boldTextSize,color: errorBorderColor),
           decoration: AppBoxDecoration.border(
               color: errorBorderColor, width: enableBorderWidth)),
       controller: pinController,

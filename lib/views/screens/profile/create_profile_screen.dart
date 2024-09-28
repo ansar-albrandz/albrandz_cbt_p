@@ -2,11 +2,8 @@ import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
 import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/models/profile/create_profile_model.dart';
-import 'package:albrandz_cbt_p/views/screens/home/home_screen.dart';
-import 'package:albrandz_cbt_p/views/screens/login/forget_pin_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/login/login_widgets.dart';
-import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
-import 'package:albrandz_cbt_p/views/screens/profile/profile_widgets.dart';
+import 'package:albrandz_cbt_p/views/screens/profile/widgets/profile_widgets.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/app_country_code_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
@@ -20,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/constants/constants.dart';
 import '../../utils/widgets/button_widgets.dart';
+import '../home/landing_screen.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({super.key});
@@ -64,7 +62,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       body: SingleChildScrollView(
           child: Column(
             children: [
-              AppImageView.screenBackgroundImageImage(path: createProfileImagePath, size: Size(width, height * .25)),
+              AppImageView.screenBackgroundImageView(path: createProfileImagePath, size: Size(width, height * .25)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
                 child: Form(
@@ -93,45 +91,48 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       5.height,
                       view.textFieldView(emailController, icon: emailIdIcon),
                       16.height,
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                view.fieldTitleTextView(DATE_OF_BIRTH_TITLE),
-                                5.height,
-                                view.textFieldView(
-                                  dobController,
-                                  onTap: () {
-                                    showCalenderView();
-                                  },
-                                  validator: (text)=> text?.defaultValidator(),
-                                  icon: dobIcon,
-                                  onlyRead: true,
-                                  keyBoard: TextInputType.datetime,
-                                )
-                              ],
+                      SizedBox(
+                        height: 95,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  view.fieldTitleTextView(DATE_OF_BIRTH_TITLE),
+                                  5.height,
+                                  view.textFieldView(
+                                    dobController,
+                                    onTap: () {
+                                      showCalenderView();
+                                    },
+                                    validator: (text)=> text?.defaultValidator(),
+                                    icon: dobIcon,
+                                    onlyRead: true,
+                                    keyBoard: TextInputType.datetime,
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          10.width,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                view.fieldTitleTextView(GENDER_TITLE),
-                                5.height,
-                                view.appDropDownView(
-                                    ["Male", "Female", "Other"],
-                                    onChanged: (text) {
-                                      setState(() {
-                                        selectedGender = text;
-                                      });
-                                    })
-                              ],
+                            10.width,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  view.fieldTitleTextView(GENDER_TITLE),
+                                  5.height,
+                                  view.appDropDownView(
+                                      ["Male", "Female", "Other"],
+                                      onChanged: (text) {
+                                        setState(() {
+                                          selectedGender = text;
+                                        });
+                                      })
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       16.height,
                       view.fieldTitleTextView(PIN_TITLE),
@@ -196,7 +197,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     LoaderBuilder(context: context).dismissLoader();
     if (profileController.isProfileCreated.value) {
       UserLocalDataController().storeLogInStatus();
-      context.toNextRemove( ProfileViewScreen());
+      context.toNextRemove( LandingScreen());
     }
   }
 }

@@ -22,7 +22,7 @@ class IntroScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppImageView.screenBackgroundImageImage(path: splashImagePath, size: Size(width, height*0.80)),
+            AppImageView.screenBackgroundImageView(path: splashImagePath, size: Size(width, height*0.80)),
             60.height,
             Align(
               alignment: Alignment.bottomCenter,

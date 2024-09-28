@@ -29,6 +29,7 @@ const AND_s = "and";
 const OK = "Ok";
 const ADD_CARD = "Add Card";
 const ADD_NEW_CARD = "Add new card";
+const UPLOAD = "Upload";
 
 // service
 

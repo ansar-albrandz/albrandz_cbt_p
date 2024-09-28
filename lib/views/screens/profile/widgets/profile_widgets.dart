@@ -2,12 +2,10 @@ import 'package:albrandz_cbt_p/views/utils/builders/app_country_code_builder.dar
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
-import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/text_filed_widgets.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProfileWidgets {
   BuildContext context;
@@ -112,10 +110,5 @@ class ProfileWidgets {
             ),
           ],
         ),
-      );
-
-  Widget _assetImage(String path) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset(path),
       );
 }

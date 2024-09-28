@@ -2,7 +2,6 @@ import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
 import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/create_profile_screen.dart';
-import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
@@ -15,6 +14,7 @@ import 'package:get/get.dart';
 
 import '../../utils/constants/constants.dart';
 import '../../utils/widgets/button_widgets.dart';
+import '../home/landing_screen.dart';
 import 'login_widgets.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -37,14 +37,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     var width = context.fullWidth;
     var height = context.fullHeight;
     var replacedMobile = "${_authController.countryCode.value}-" +
-        _authController.mobileNumber.value.replaceItems(8);
+        _authController.mobileNumber.value.replaceItems();
     return Scaffold(
       body: Stack(
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
-                AppImageView.screenBackgroundImageImage(
+                AppImageView.screenBackgroundImageView(
                     path: verifyOTPImagePath,
                     size: Size(width, height * .52)),
                 Form(
@@ -57,8 +57,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         30.height,
                         view.titleView(VERIFY),
                         20.height,
+                        // view.mobileTextView(
+                        //     "Enter the 6 digit OTP sent to you at \n$replacedMobile"),
                         view.mobileTextView(
-                            "Enter the 6 digit OTP sent to you at $replacedMobile"),
+                            "We have sent you the 6 digit OTP at $replacedMobile"),
                         5.height,
                         view.otpFieldsView(otpController),
                         30.height,
@@ -115,7 +117,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
        Get.to(const CreateProfileScreen());
      }else{
        await UserLocalDataController().storeLogInStatus();
-       context.toNextRemove(ProfileViewScreen());
+       context.toNextRemove(LandingScreen());
      }
     }
   }
