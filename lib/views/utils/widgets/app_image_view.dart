@@ -1,5 +1,6 @@
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/size_constants.dart';
 
@@ -38,4 +39,9 @@ class AppImageView {
   static appLogoView({String imagePath = appLogoPath}){
     return Image.asset(imagePath,height: appLogoSize,width: appLogoSize,);
   }
+
+ Widget assetSVGImageView(String path) => Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: SvgPicture.asset(path),
+ );
 }

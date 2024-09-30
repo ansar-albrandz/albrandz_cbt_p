@@ -44,6 +44,7 @@ const USERNAME_s = "username";
 const EMAIL_s = "email";
 const EMAIL = "Email";
 const CONTINUE = "Continue";
+const UPDATE = "Update";
 const ENTER_MOBILE = "Enter your mobile number";
 const DO_NOT_HAVE_ACCOUNT = "Don't have an account? ";
 const FORGET_PASSWORD = "Forget Password";
@@ -58,7 +59,8 @@ const INITAL_COUNTRY_CODE = "+91";
 const INITAL_COUNTRY_FLAG = "IN";
 
 // titles
-const CREATE_PROFILE = "Create Profiles";
+const CREATE_PROFILE = "Create Profile";
+const UPDATE_PROFILE = "Update Profile";
 const LOGIN = "Login";
 const LOGIN_WITH_PIN = "Login with Pin";
 const VERIFY = "Verify";

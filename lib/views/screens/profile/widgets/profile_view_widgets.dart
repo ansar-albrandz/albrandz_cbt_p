@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
@@ -15,9 +16,9 @@ class ProfileViewWidgets {
 
   ProfileViewWidgets({required this.context});
 
-  profilePictureView(bool isProfilePicAvailable,{void Function()? onTap}) {
+  profilePictureView({void Function()? onTap}) {
     final takeImageController = Get.put(TakeImageController());
-    // final takeImageController = Get.put(TakeImageController());
+    final profileController = Get.put(ProfileController());
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -30,11 +31,20 @@ class ProfileViewWidgets {
             decoration: BoxDecoration(
                 color: Colors.grey.shade200, borderRadius: BorderRadius.circular(profileImageSize/2)),
             child: Obx((){
-              var image = takeImageController.selectedImagePath.value;
-              return image.isNotEmpty?CircleAvatar(
-                // borderRadius: BorderRadius.circular(50),
-                backgroundImage: isProfilePicAvailable?NetworkImage(FILE_PATH_URL+takeImageController.selectedImagePath.value,):FileImage(File(takeImageController.selectedImagePath.value),),
-              ):const Icon(Icons.person_outline,size: 70,color: Colors.grey,);
+              if(takeImageController.selectedImagePath.value.isNotEmpty){
+                return CircleAvatar(
+                  backgroundImage: FileImage(File(takeImageController.selectedImagePath.value),),
+                );
+              }else if(profileController.imageUri.value.isNotEmpty){
+                return CircleAvatar(
+                  backgroundImage: NetworkImage(FILE_PATH_URL+profileController.imageUri.value),
+                );
+              }
+              else{
+                return const CircleAvatar(
+                  child: Icon(Icons.person_outline,size: 70,color: Colors.grey,),
+                );
+              }
             }),
           ),
           InkWell(

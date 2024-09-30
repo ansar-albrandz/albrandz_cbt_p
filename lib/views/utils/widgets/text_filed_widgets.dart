@@ -3,9 +3,9 @@ import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../builders/app_country_code_builder.dart';
+import 'app_image_view.dart';
 
 class TextFiledWidgets {
   Widget appTextFieldView(TextEditingController controller,
@@ -35,15 +35,10 @@ class TextFiledWidgets {
           filled: true,
           fillColor: fillInputColor,
           counterText: counterText,
-          prefixIcon: _assetImage(prefixIcon),
+          prefixIcon: AppImageView().assetSVGImageView(prefixIcon),
           contentPadding: EdgeInsets.zero),
     );
   }
-
-  Widget _assetImage(String path) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset(path),
-      );
 
   Widget phoneWithCountryCOdeTextField(TextEditingController controller,
       {bool canSelect = true,

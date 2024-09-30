@@ -20,7 +20,8 @@ import '../../utils/widgets/button_widgets.dart';
 import '../home/landing_screen.dart';
 
 class CreateProfileScreen extends StatefulWidget {
-  const CreateProfileScreen({super.key});
+  final bool isNew;
+   const CreateProfileScreen({super.key, required this.isNew});
 
   @override
   State<CreateProfileScreen> createState() => _CreateProfileScreenState();
@@ -33,23 +34,33 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController pinController = TextEditingController();
-  String selectedGender = "";
+  String selectedGender = "Male";
   var profileController = Get.put(ProfileController());
   final _authController = Get.put(AuthController());
   var initCountry = CountryData();
   @override
   void initState() {
     super.initState();
-   // init();
+   init();
   }
 
   init() {
     setState(() {
-      mobileController =
-          TextEditingController(text: _authController.mobileNumber.value);
-      initCountry = CountryData(
-          code: _authController.countryCode.value,
-          flag: _authController.countryFlag.value);
+      if(!widget.isNew){
+        mobileController =
+            TextEditingController(text:profileController.mobileNumber.value);
+         nameController = TextEditingController(text: profileController.profileData.value.name??"NA");
+         emailController = TextEditingController(text: profileController.profileData.value.email??"NA");
+         dobController = TextEditingController(text: profileController.profileData.value.dob??"NA");
+         pinController = TextEditingController(text: profileController.profileData.value.pin??"NA");
+         selectedGender = profileController.profileData.value.gender??"Male";
+      }else{
+        mobileController =
+            TextEditingController(text: _authController.mobileNumber.value);
+        initCountry = CountryData(
+            code: _authController.countryCode.value,
+            flag: _authController.countryFlag.value);
+      }
     });
   }
 
@@ -70,7 +81,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      view.titleView(CREATE_PROFILE),
+                      view.titleView(widget.isNew?CREATE_PROFILE:UPDATE_PROFILE),
                       20.height,
                       view.fieldTitleTextView(
                         FULL_NAME_TITLE,
@@ -81,11 +92,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                           icon: profileNameIcon,
                           validator: (text) =>
                           text!.isEmpty ? "This field is required" : null),
-                      16.height,
-                      view.fieldTitleTextView(MOBILE_TITLE),
+                      widget.isNew?16.height:Container(),
+                      widget.isNew?view.fieldTitleTextView(MOBILE_TITLE):Container(),
                       5.height,
-                      view.mobileWithCountryCod4Field(mobileController,
-                          country: initCountry),
+                      widget.isNew?view.mobileWithCountryCod4Field(mobileController,
+                          country: initCountry):Container(),
                       16.height,
                       view.fieldTitleTextView(EMAIL_ID_TITLE),
                       5.height,
@@ -106,7 +117,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                     onTap: () {
                                       showCalenderView();
                                     },
-                                    validator: (text)=> text?.defaultValidator(),
+                                    // validator: (text)=> text?.defaultValidator(),
                                     icon: dobIcon,
                                     onlyRead: true,
                                     keyBoard: TextInputType.datetime,
@@ -122,7 +133,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                   view.fieldTitleTextView(GENDER_TITLE),
                                   5.height,
                                   view.appDropDownView(
-                                      ["Male", "Female", "Other"],
+                                      selectedGender,
                                       onChanged: (text) {
                                         setState(() {
                                           selectedGender = text;
@@ -134,16 +145,16 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                           ],
                         ),
                       ),
-                      16.height,
+                      widget.isNew?16.height:Container(),
                       view.fieldTitleTextView(PIN_TITLE),
                       5.height,
                       LoginWidgets(context: context)
                           .pinTextFieldView(pinController, icon: Icons.lock_outlined),
-                      20.height,
-                      view.policyCheckboxView(
-                          onChanged: onCheckBoxChanged, value: isChecked),
+                      widget.isNew?20.height:Container(),
+                      widget.isNew?view.policyCheckboxView(
+                          onChanged: onCheckBoxChanged, value: isChecked):Container(),
                       30.height,
-                      ButtonWidgets().appButtonFillView(CONTINUE, onTap: () {
+                      ButtonWidgets().appButtonFillView(widget.isNew?CONTINUE:UPDATE, onTap: () {
                         _validField();
                       }, width: width),
                     ],
@@ -166,38 +177,63 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
 
   _validField() {
     if (createKey.currentState!.validate()) {
-      if (!isChecked) {
-        Get.snackbar("Warning!", "Please check terms & policy");
-      } else {
-        createNewUser();
+      if(widget.isNew){
+        if (!isChecked) {
+          "Please check terms & policy".showToast();
+        } else {
+          createNewUser();
+        }
+      }else {
+        updateProfile();
       }
+
     }
   }
 
-  var dob = DateTime.now();
 
   showCalenderView() async {
-    dob = (await showDatePicker(
+
+    var dob = (await showDatePicker(
         context: context,
         firstDate: DateTime(1900),
-        lastDate: DateTime.now()))!;
-    setState(() {});
-    dobController = TextEditingController(text: dob.toDateOnly);
+        lastDate: DateTime.now().subtract(Duration(days: 6570))));
+    setState(() {
+    });
+    if(widget.isNew){
+      dobController = TextEditingController(text: dob!.toDateOnly);
+    }else{
+      dobController = TextEditingController(text: profileController.profileData.value.dob);
+    }
   }
 
   createNewUser() async {
     var data = CreateProfileModel(
-        dob: dob.toDateOnly,
+        dob: dobController.text.trim(),
         email: emailController.text.trim(),
         gender: selectedGender,
         name: nameController.text.trim(),
         pin: pinController.text.trim());
     LoaderBuilder(context: context).showFullScreenLoader();
-    await profileController.createProfile(data);
+      await profileController.createProfile(data);
     LoaderBuilder(context: context).dismissLoader();
     if (profileController.isProfileCreated.value) {
       UserLocalDataController().storeLogInStatus();
-      context.toNextRemove( LandingScreen());
+      context.toNextRemove(LandingScreen());
+    }
+  }
+
+  updateProfile() async {
+    var data = CreateProfileModel(
+        dob: dobController.text.trim(),
+        email: emailController.text.trim(),
+        gender: selectedGender,
+        name: nameController.text.trim(),
+        pin: pinController.text.trim());
+    LoaderBuilder(context: context).showFullScreenLoader();
+    await profileController.updateProfile(data);
+    LoaderBuilder(context: context).dismissLoader();
+    if (profileController.isProfileUpdated.value) {
+      context.onBackPressed;
     }
   }
 }

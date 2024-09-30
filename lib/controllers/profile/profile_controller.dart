@@ -16,6 +16,7 @@ class ProfileController extends GetxController {
   var isProfileCreated = false.obs;
   var isProfileUpdated = false.obs;
   var isProfileLoading = false.obs;
+  var mobileNumber = ''.obs;
 
 
   Future<void> getProfile() async {
@@ -24,16 +25,14 @@ class ProfileController extends GetxController {
       var data = ProfileModel.fromJson(response);
       if (response != null && data.response?.status == 'success') {
         profileData.value = data.body?.personal ?? ProfilePersonalData();
+        mobileNumber.value = data.body?.mobile??"NA";
         isProfileLoading(true);
-        isLoading(true);
       } else {
         isProfileLoading(false);
-        isLoading(false);
         (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       isProfileLoading(false);
-      isLoading(false);
     }
   }
 
@@ -47,33 +46,30 @@ class ProfileController extends GetxController {
         (response['response']['message']).toString().showToast();
       } else {
         isProfileCreated(false);
-
+        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       isProfileCreated(false);
-    } finally {
-      isLoading(false);
     }
   }
 
-  Future<void> updateProfile(Map<String, dynamic> profileDetails) async {
-    isLoading(true);
+  Future<void> updateProfile(CreateProfileModel profileDetails) async {
     try {
       final response = await _apiController.put(
         updateProfileEndPoint,
-        data: profileDetails,
+        data: profileDetails.toJson(),
+        isHeader: true
       );
       if (response != null && response['response']['status'] == 'success') {
-        profileData.value = response['response']['data'];
         isProfileUpdated(true);
         (response['response']['message']).toString().showToast();
       } else {
         isProfileUpdated(false);
+        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
+      print(error);
       isProfileUpdated(false);
-    } finally {
-      isLoading(false);
     }
   }
 

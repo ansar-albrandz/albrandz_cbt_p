@@ -113,8 +113,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     LoaderBuilder(context: context).dismissLoader();
     if (_authController.isOTPVerified.value) {
       await profileController.getProfile();
-     if(!profileController.isProfileLoading.value){
-       Get.to(const CreateProfileScreen());
+     if(profileController.isProfileLoading.value == false){
+       Get.to(CreateProfileScreen(isNew: true,));
      }else{
        await UserLocalDataController().storeLogInStatus();
        context.toNextRemove(LandingScreen());

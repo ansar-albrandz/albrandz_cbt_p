@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/take_image_controller.dart';
+import 'package:albrandz_cbt_p/views/screens/profile/create_profile_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/widgets/profile_view_widgets.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
@@ -60,7 +61,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                     onTap: (){
                       print("Profile picture clicked");
                     },
-                    child: view.profilePictureView(profileController.imageUri.value.isNotEmpty?true:false,onTap: (){
+                    child: view.profilePictureView(onTap: (){
                       view.showImageSelectionBottomSheet();
                     }),
                   ),
@@ -70,7 +71,9 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       title: profileController.profileData.value.name??"NA",
                       leadingIcon: profileNameIcon,
                       trailingButton: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(CreateProfileScreen(isNew: false,));
+                          },
                           icon: SvgPicture.asset(editProfileIcon))),
                   view.lineView(),
                   view.infoFieldView(

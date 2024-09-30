@@ -60,7 +60,7 @@ class ApiController {
       final response = await _dio.put(
         FULL_URL + endpoint,
         data: data,
-        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
+        options: Options(headers: isHeader?await _getHeaders():_defaultHeaders),
       );
       checkTokenStatus(response);
       return handleResponse(response);
@@ -75,7 +75,7 @@ class ApiController {
       final response = await _dio.delete(
         FULL_URL + endpoint,
         data: data,
-        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
+        options: Options(headers: isHeader?await _getHeaders():_defaultHeaders),
       );
       checkTokenStatus(response);
       return handleResponse(response);
@@ -120,7 +120,7 @@ class ApiController {
         "file":"$prefixUel$encodeB4"
       };
 
-      final response = await _dio.post(
+      final response = await _dio.put(
         FULL_URL+endpoint,
         data: body,
         options: Options(headers: isHeader?await _getHeaders():_defaultHeaders),
