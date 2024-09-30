@@ -26,17 +26,25 @@ class ProfileController extends GetxController {
       if (response != null && data.response?.status == 'success') {
         profileData.value = data.body?.personal ?? ProfilePersonalData();
         mobileNumber.value = data.body?.mobile??"NA";
-        isProfileLoading(true);
+        if(data.body?.personal?.name?.isEmpty == true){
+          isProfileLoading(false);
+        }else{
+          isProfileLoading(true);
+        }
+
+        isLoading(true);
       } else {
         isProfileLoading(false);
+        isLoading(false);
         (response['response']['message']).toString().showToast();
       }
     } catch (error) {
+      isLoading(false);
       isProfileLoading(false);
     }
   }
 
-  Future<void> createProfile(CreateProfileModel profileDetails) async {
+  Future<void> createProfile(ProfilePersonalData profileDetails) async {
     isLoading(true);
     try {
       final response = await _apiController.post(createProfileEndPoint,
@@ -53,7 +61,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> updateProfile(CreateProfileModel profileDetails) async {
+  Future<void> updateProfile(ProfilePersonalData profileDetails) async {
     try {
       final response = await _apiController.put(
         updateProfileEndPoint,
@@ -62,6 +70,8 @@ class ProfileController extends GetxController {
       );
       if (response != null && response['response']['status'] == 'success') {
         isProfileUpdated(true);
+        profileData.value = profileDetails;
+
         (response['response']['message']).toString().showToast();
       } else {
         isProfileUpdated(false);

@@ -45,7 +45,7 @@ class ApiController {
       final response = await _dio.post(
         FULL_URL + endpoint,
         data: data,
-        options: Options(headers: isHeader?_getHeaders():_defaultHeaders),
+        options: Options(headers: isHeader?await _getHeaders():_defaultHeaders),
       );
       checkTokenStatus(response);
       return handleResponse(response);

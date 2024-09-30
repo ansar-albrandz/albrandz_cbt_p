@@ -39,9 +39,20 @@ const driverDocumentIcon = "assets/icons/driver documents.svg";
 const editProfileIcon = "assets/icons/edit.svg";
 const profileNameIcon = "assets/icons/profile full name.svg";
 const passwordPinIcon = "assets/icons/pin password.svg";
+const searchIcon = "assets/icons/search.svg";
+const calenderIcon = "assets/icons/reserve for later.svg";
 
 /// json paths
 
 const carAnimationPath = "assets/jsons/car.json";
 const successAnimationPath = 'assets/lotties/done.json';
+
+/// cars
+const rentalCarImagePath = "assets/cars/rental_car.jpg";
+const rideCarImagePath = "assets/cars/ride-car.jpg";
+
+/// banners
+const banner1Path = "assets/banners/banner1.png";
+const banner2Path = "assets/banners/banner2.png";
+const banner3Path = "assets/banners/banner3.png";
 

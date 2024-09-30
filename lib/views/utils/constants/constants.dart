@@ -66,6 +66,16 @@ const LOGIN_WITH_PIN = "Login with Pin";
 const VERIFY = "Verify";
 const SIGNUP = "Signup";
 const REGISTER = "Register";
+const PROFILE = "Profile";
+const SAVE_PLACES = 'Saved Places';
+const RIDE_HISTORIES = 'Ride Histories';
+const PAYMENTS = 'Payments';
+const NOTIFICATIONS = 'Notifications';
+const TERM_CONDITIONS = 'Terms & Conditions';
+const CONTACT_US = 'Contact Us & FAQs';
+const ABOUTE_US = 'About Us';
+const SHARE = 'Share';
+const APP_VERSION = 'App Version';
 
 
 // text fields

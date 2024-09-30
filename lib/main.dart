@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: APP_NAME,
       theme: AppTheme().getAppTheme(),
-      home:  SplashScreen(),
+      home:  const SplashScreen(),
     );
   }
 }

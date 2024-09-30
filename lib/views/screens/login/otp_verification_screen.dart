@@ -1,6 +1,7 @@
 import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
 import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
+import 'package:albrandz_cbt_p/views/screens/home/drawer_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/create_profile_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
@@ -14,7 +15,6 @@ import 'package:get/get.dart';
 
 import '../../utils/constants/constants.dart';
 import '../../utils/widgets/button_widgets.dart';
-import '../home/landing_screen.dart';
 import 'login_widgets.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -114,10 +114,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     if (_authController.isOTPVerified.value) {
       await profileController.getProfile();
      if(profileController.isProfileLoading.value == false){
-       Get.to(CreateProfileScreen(isNew: true,));
+       Get.to(const CreateProfileScreen(isNew: true,));
      }else{
        await UserLocalDataController().storeLogInStatus();
-       context.toNextRemove(LandingScreen());
+       context.toNextRemove(DrawerScreen());
      }
     }
   }

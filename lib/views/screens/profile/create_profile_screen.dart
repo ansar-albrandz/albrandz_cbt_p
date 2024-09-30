@@ -1,7 +1,7 @@
 import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
 import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
-import 'package:albrandz_cbt_p/models/profile/create_profile_model.dart';
+import 'package:albrandz_cbt_p/views/screens/home/drawer_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/login/login_widgets.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/widgets/profile_widgets.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/app_country_code_builder.dart';
@@ -15,9 +15,9 @@ import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../models/profile/profile_model.dart';
 import '../../utils/constants/constants.dart';
 import '../../utils/widgets/button_widgets.dart';
-import '../home/landing_screen.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   final bool isNew;
@@ -196,7 +196,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     var dob = (await showDatePicker(
         context: context,
         firstDate: DateTime(1900),
-        lastDate: DateTime.now().subtract(Duration(days: 6570))));
+        lastDate: DateTime.now().subtract(Duration(days: 7000))));
     setState(() {
     });
     if(widget.isNew){
@@ -207,7 +207,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   createNewUser() async {
-    var data = CreateProfileModel(
+    var data = ProfilePersonalData(
         dob: dobController.text.trim(),
         email: emailController.text.trim(),
         gender: selectedGender,
@@ -218,12 +218,12 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     LoaderBuilder(context: context).dismissLoader();
     if (profileController.isProfileCreated.value) {
       UserLocalDataController().storeLogInStatus();
-      context.toNextRemove(LandingScreen());
+      context.toNextRemove(DrawerScreen());
     }
   }
 
   updateProfile() async {
-    var data = CreateProfileModel(
+    var data = ProfilePersonalData(
         dob: dobController.text.trim(),
         email: emailController.text.trim(),
         gender: selectedGender,

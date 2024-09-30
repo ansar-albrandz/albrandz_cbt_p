@@ -11,7 +11,7 @@ class TextFiledWidgets {
   Widget appTextFieldView(TextEditingController controller,
       {String? hintText,
       required String prefixIcon,
-      String? suffixIcon,
+      IconData? suffixIcon,
       String? Function(String?)? validator,
       void Function(String)? onChanged,
       TextInputType keyBordTYpe = TextInputType.text,
@@ -19,7 +19,7 @@ class TextFiledWidgets {
       bool enabled = true,
       bool readOnly = false,
       int? maxLength,
-      String counterText = ""}) {
+      String counterText = "",void Function()? onSuffixTap}) {
     return TextFormField(
       onTap: onTap,
       controller: controller,
@@ -34,6 +34,9 @@ class TextFiledWidgets {
           hintText: hintText,
           filled: true,
           fillColor: fillInputColor,
+          suffixIcon: InkWell(
+            onTap: onSuffixTap,
+              child: Icon(suffixIcon)),
           counterText: counterText,
           prefixIcon: AppImageView().assetSVGImageView(prefixIcon),
           contentPadding: EdgeInsets.zero),

@@ -1,3 +1,4 @@
+import 'package:albrandz_cbt_p/views/screens/home/drawer_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/widgets/profile_widgets.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../utils/widgets/button_widgets.dart';
-import '../home/landing_screen.dart';
 
 class ProfileSuccessScreen extends StatelessWidget {
   const ProfileSuccessScreen({super.key});
@@ -33,7 +33,7 @@ class ProfileSuccessScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: ButtonWidgets().appButtonFillView(NEXT, onTap: () {
-              context.toNext(LandingScreen());
+              context.toNext(DrawerScreen());
             }, width: width),
           ),
           20.height,

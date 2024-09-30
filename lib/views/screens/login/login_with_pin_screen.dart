@@ -1,6 +1,7 @@
 import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
 import 'package:albrandz_cbt_p/controllers/auth/login_with_pin_controller.dart';
 import 'package:albrandz_cbt_p/controllers/data/user_local_data_controller.dart';
+import 'package:albrandz_cbt_p/views/screens/home/drawer_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/login/forget_pin_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/loader_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
@@ -13,7 +14,6 @@ import '../../utils/constants/assets_path.dart';
 import '../../utils/constants/constants.dart';
 import '../../utils/widgets/app_image_view.dart';
 import '../../utils/widgets/button_widgets.dart';
-import '../home/landing_screen.dart';
 import 'login_widgets.dart';
 
 class LoginWithPinScreen extends StatefulWidget {
@@ -108,7 +108,7 @@ class _LoginWithPinScreenState extends State<LoginWithPinScreen> {
       } else {
         UserLocalDataController().storeLogInStatus(value: false);
       }
-      context.toNextRemove(LandingScreen());
+      context.toNextRemove(DrawerScreen());
     }
   }
 
