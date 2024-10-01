@@ -18,6 +18,7 @@ const splashImagePath = "assets/images/splash_screen.webp";
 const submittedSuccessImagePath = "assets/images/submitted_successfully.webp";
 const termsConditionImagePath = "assets/images/terms_&_condition_bg.png";
 const verifyOTPImagePath = "assets/images/verify.webp";
+const calenderImagePath = "assets/images/calender_image.png";
 
 /// images paths
 
@@ -29,7 +30,7 @@ const addCardIcon = "assets/icons/ad card.svg";
 const emailIdIcon = "assets/icons/email id.svg";
 const dobIcon = "assets/icons/DOB.svg";
 const genderIcon = "assets/icons/gender.svg";
-const callIcon = "assets/icons/gender.svg";
+const callIcon = "assets/icons/call.svg";
 const contactDetailsIcon = "assets/icons/contact details.svg";
 const countryGlobIcon = "assets/icons/country.svg";
 const creditCardIcon = "assets/icons/credit card.svg";
@@ -41,6 +42,8 @@ const profileNameIcon = "assets/icons/profile full name.svg";
 const passwordPinIcon = "assets/icons/pin password.svg";
 const searchIcon = "assets/icons/search.svg";
 const calenderIcon = "assets/icons/reserve for later.svg";
+const homeIcon = "assets/icons/home address.svg";
+const shareIcon = "assets/icons/share.svg";
 
 /// json paths
 
@@ -48,8 +51,8 @@ const carAnimationPath = "assets/jsons/car.json";
 const successAnimationPath = 'assets/lotties/done.json';
 
 /// cars
-const rentalCarImagePath = "assets/cars/rental_car.jpg";
-const rideCarImagePath = "assets/cars/ride-car.jpg";
+const rentalCarImagePath = "assets/cars/rental_car.png";
+const rideCarImagePath = "assets/cars/ride_car.png";
 
 /// banners
 const banner1Path = "assets/banners/banner1.png";

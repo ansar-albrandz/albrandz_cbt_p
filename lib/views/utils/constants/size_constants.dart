@@ -1,4 +1,4 @@
-const normalTextSize = 14.0;
+const normalTextSize = 11.0;
 const semiBoldTextSize = 12.0;
 const boldTextSize = 18.0;
 const horizontalPadding = 16.0;

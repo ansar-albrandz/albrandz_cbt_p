@@ -21,7 +21,14 @@ const forgetPINEndPoint = "forgot/pin";
 // profile end points
 const createProfileEndPoint = "personal";
 const updateProfileEndPoint = "personal";
-const getProfileEndPoint = "personal";
+const getProfileEndPoint = "profile";
 const uploadProfilePictureEndPoint = "photo";
 const updateProfilePictureEndPoint = "photo";
 const getProfilePictureEndPoint = "photo";
+
+
+// web urls
+
+const termConditionUrl = "https://cabike.in/";
+const contactUrl = "https://cabike.in/";
+const aboutUsUrl = "https://cabike.in/";

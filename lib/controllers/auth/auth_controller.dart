@@ -91,9 +91,8 @@ class AuthController extends GetxController {
 
   // Method to log out
   Future<void> logout() async {
-    isLoading(true);
     try {
-      final response = await _apiController.get(logoutEndPoint);
+      final response = await _apiController.get(logoutEndPoint,isHeader: true);
       if (response != null && response['response']['status'] == 'success') {
         isLoggedOut(true);
         (response['response']['message']).toString().showToast();
@@ -102,8 +101,6 @@ class AuthController extends GetxController {
       }
     } catch (error) {
       isLoggedOut(false);
-    } finally {
-      isLoading(false);
     }
   }
 }

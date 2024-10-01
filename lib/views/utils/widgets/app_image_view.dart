@@ -40,8 +40,8 @@ class AppImageView {
     return Image.asset(imagePath,height: appLogoSize,width: appLogoSize,);
   }
 
- Widget assetSVGImageView(String path) => Padding(
+ Widget assetSVGImageView(String path,{Color? color}) => Padding(
    padding: const EdgeInsets.all(8.0),
-   child: SvgPicture.asset(path),
+   child: SvgPicture.asset(path,color: color,),
  );
 }

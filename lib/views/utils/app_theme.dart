@@ -1,3 +1,4 @@
+import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/text_style_extensions.dart';
@@ -17,7 +18,7 @@ class AppTheme {
   );
 
   AppBarTheme _appBarTheme() =>
-       AppBarTheme(backgroundColor: primaryColor,titleTextStyle: TextStyle().whiteTitleTextStyle);
+       AppBarTheme(backgroundColor: Colors.transparent,titleTextStyle: AppTextStyle.boldWhite(),);
 
   ElevatedButtonThemeData _buttonThemeData() => ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

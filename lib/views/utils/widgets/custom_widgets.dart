@@ -1,48 +1,53 @@
 import 'package:flutter/material.dart';
 
+import '../constants/size_constants.dart';
+import '../styles/app_text_style.dart';
+
 class CustomWidgets {
-  Widget storyItemView({String? imageUrl, Widget? bottomView}) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.blue, width: 3),
-          ),
-          child: ClipOval(
-            child: imageUrl != null
-                ? Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                  )
-                : const Icon(
-                    Icons.person_outline,
-                    size: 45,
-                  ),
-          ),
-        ),
-        // Icon at the bottom
-        Positioned(
-          bottom: 0,
-          child: bottomView ??
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.blue,
-                  size: 30,
-                ),
+  static AppBar customAppBarView(){
+    return AppBar(
+      elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      leading: Builder(
+        builder: (context) => Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: Colors.grey.shade400,
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 20,
               ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
         ),
-      ],
+      ),
+      backgroundColor: Colors.transparent,
     );
   }
 
+  static Widget screenTitleView({required String title,required IconData icon}) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
+    child: Align(
+      alignment: Alignment.topRight,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+           Icon(
+            icon,
+            size: 50,
+          ),
+          Text(
+            title,
+            style: AppTextStyle.boldBlack(),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 

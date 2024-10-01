@@ -25,6 +25,7 @@ class ProfileViewScreen extends StatefulWidget {
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
    var profileController = Get.put(ProfileController());
    var takeImageController = Get.put(TakeImageController());
+   bool isShowingPin = false;
 
    @override
   void initState() {
@@ -68,43 +69,52 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                   view.userNameView(profileController.profileData.value.name??"NA"),
                   40.height,
                   view.infoFieldView(
-                      title: profileController.profileData.value.name??"NA",
-                      leadingIcon: profileNameIcon,
+                      title: profileController.mobileNumber.value,
+                      leadingIcon: callIcon,
                       trailingButton: IconButton(
                           onPressed: () {
-                            Get.to(CreateProfileScreen(isNew: false,));
+                            Get.to(const CreateProfileScreen(isNew: false));
                           },
                           icon: SvgPicture.asset(editProfileIcon))),
                   view.lineView(),
                   view.infoFieldView(
-                      title: profileController.profileData.value.email??"NA", leadingIcon: emailIdIcon),
+                      title: profileController.profileData.value.email != ""?profileController.profileData.value.email??"NA":"NA", leadingIcon: emailIdIcon),
                   view.lineView(),
-                  view.infoFieldView(title: profileController.profileData.value.dob??"NA", leadingIcon: dobIcon),
+                  view.infoFieldView(title: profileController.profileData.value.dob!= ""?profileController.profileData.value.dob??"NA":"NA", leadingIcon: dobIcon),
                   view.lineView(),
-                  view.infoFieldView(title: profileController.profileData.value.gender??"NA", leadingIcon: genderIcon),
+                  view.infoFieldView(title: profileController.profileData.value.gender!= ""?profileController.profileData.value.gender??"NA":"NA", leadingIcon: genderIcon),
                   view.lineView(),
                   view.infoFieldView(
-                      title: profileController.profileData.value.pin??"NA", leadingIcon: passwordPinIcon),
+                      title: isShowingPin?profileController.profileData.value.pin??"NA":"* * * * * *", leadingIcon: passwordPinIcon,
+                    trailingButton: IconButton(onPressed: (){
+                      setState(() {
+                        isShowingPin = !isShowingPin;
+                      });
+                    }, icon: Icon(isShowingPin? Icons.visibility
+                        : Icons.visibility_off))
+                  ),
                   view.lineView(),
                   view.infoFieldView(
                       title: ADD_CARD,
                       leadingIcon: creditCardIcon,
                       trailingButton: IconButton(
                           onPressed: () {},
-                          icon: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(addCardIcon),
+                          icon: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.add),
                           ))),
                   view.lineView(),
                   40.height,
                   takeImageController.selectedImagePath.value.isEmpty?ButtonWidgets()
-                      .appButtonFillView(OK, width: width):ButtonWidgets()
+                      .appButtonFillView(OK, width: width,onTap: (){
+                        context.onBackPressed;
+                  }):ButtonWidgets()
                       .appButtonFillView(UPLOAD, width: width,onTap: ()async{
                         LoaderBuilder(context: context).showFullScreenLoader();
                         await profileController.updateProfilePicture(File(takeImageController.selectedImagePath.value));
                         LoaderBuilder(context: context).dismissLoader();
                         if(profileController.uploadImageStatus.value){
-                          print("Image uploaded");
+                          context.onBackPressed;
                         }
                   }),
                   50.height

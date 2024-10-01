@@ -103,7 +103,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       view.textFieldView(emailController, icon: emailIdIcon),
                       16.height,
                       SizedBox(
-                        height: 95,
+                        height: 70,
                         child: Row(
                           children: [
                             Expanded(
@@ -145,7 +145,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                           ],
                         ),
                       ),
-                      widget.isNew?16.height:Container(),
+                     16.height,
                       view.fieldTitleTextView(PIN_TITLE),
                       5.height,
                       LoginWidgets(context: context)
@@ -199,11 +199,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
         lastDate: DateTime.now().subtract(Duration(days: 7000))));
     setState(() {
     });
-    if(widget.isNew){
-      dobController = TextEditingController(text: dob!.toDateOnly);
-    }else{
-      dobController = TextEditingController(text: profileController.profileData.value.dob);
-    }
+    dobController = TextEditingController(text: dob!.toDateOnly);
   }
 
   createNewUser() async {

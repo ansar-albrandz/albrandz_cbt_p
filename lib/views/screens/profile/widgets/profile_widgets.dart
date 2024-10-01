@@ -43,7 +43,7 @@ class ProfileWidgets {
 
   Widget appDropDownView(String item,
       {required void Function(dynamic)? onChanged, String? hintText}) {
-    var items = ["Male", "Female", "Other"];
+    var items = ["Male", "Female"];
     return SizedBox(
       height: 48,
       child: DropdownButtonFormField(

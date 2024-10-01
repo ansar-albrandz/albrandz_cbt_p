@@ -21,6 +21,7 @@ const FROM = "From";
 const SURE  = "Sure";
 const NOT_NOW = "Not Now";
 const TO = "To";
+const YES = "Yes";
 const NO = "No";
 const OR = "Or";
 const OR_c = "OR";
@@ -75,7 +76,7 @@ const TERM_CONDITIONS = 'Terms & Conditions';
 const CONTACT_US = 'Contact Us & FAQs';
 const ABOUTE_US = 'About Us';
 const SHARE = 'Share';
-const APP_VERSION = 'App Version';
+const APP_VERSION = 'Version';
 
 
 // text fields
