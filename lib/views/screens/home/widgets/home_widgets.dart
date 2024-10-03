@@ -2,6 +2,7 @@ import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
 import 'package:albrandz_cbt_p/views/utils/borders/app_border_radius.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/text_filed_widgets.dart';
@@ -20,14 +21,14 @@ class HomeWidgets {
 
   Widget drawerListItemView(
       {required String title,
-      required IconData prefixIcon,
-      IconData trailingIcon = Icons.arrow_forward_ios_sharp,
+      required String prefixIcon,
+      IconData trailingIcon = Icons.arrow_right_outlined,
       void Function()? onTap,Color color = Colors.white}) {
     return Column(
       children: [
         ListTile(
-            leading: Icon(prefixIcon, color: color),
-            trailing: Icon(trailingIcon, color: color, size: 15),
+            leading: AppImageView().assetSVGImageView(prefixIcon,color: color),
+            trailing: Icon(trailingIcon, color: color, size: appIconSize),
             title: Text(
               title,
               style: color == Colors.white?AppTextStyle.normalWhite():AppTextStyle.normalBlack(),
@@ -63,17 +64,18 @@ class HomeWidgets {
             onTap: onShareTap,
             child: Row(
               children: [
-                AppImageView().assetSVGImageView(shareIcon,color: Colors.white),
+                AppImageView().assetSVGImageView(shareIcon,color: Colors.white,size: 25),
+                10.width,
                 Text(
                   SHARE,
-                  style: AppTextStyle.normalWhite(),
+                  style: AppTextStyle.normalWhite(textSize: semiBoldTextSize),
                 ),
               ],
             ),
           ),
           Obx(()=>Text(
             '$APP_VERSION - ${controller.appVersion.value}',
-            style: AppTextStyle.normalWhite(),
+            style: AppTextStyle.normalWhite(textSize: semiBoldTextSize),
           )),
         ],
       ),

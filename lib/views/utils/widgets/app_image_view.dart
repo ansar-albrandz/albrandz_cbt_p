@@ -5,11 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/size_constants.dart';
 
 class AppImageView {
-  // BuildContext context;
-  // AppImageView({required this.context});
-
- static Widget backGroundAssetImage(
-      {required String path, required Widget child,required Size size}) {
+  static Widget backGroundAssetImage(
+      {required String path, required Widget child, required Size size}) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -17,7 +14,7 @@ class AppImageView {
             height: size.height,
             width: size.width,
             decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(path),fit: BoxFit.fill),
+              image: DecorationImage(image: AssetImage(path), fit: BoxFit.fill),
             ),
           ),
           child
@@ -26,22 +23,29 @@ class AppImageView {
     );
   }
 
-  static screenBackgroundImageView({required String path,required Size size}){
-   return Container(
-     height: size.height,
-     width: size.width,
-     decoration: BoxDecoration(
-       image: DecorationImage(image: AssetImage(path),fit: BoxFit.fill),
-     ),
-   );
+  static screenBackgroundImageView({required String path, required Size size}) {
+    return Container(
+      height: size.height,
+      width: size.width,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(path), fit: BoxFit.fill),
+      ),
+    );
   }
 
-  static appLogoView({String imagePath = appLogoPath}){
-    return Image.asset(imagePath,height: appLogoSize,width: appLogoSize,);
+  static appLogoView({String imagePath = appLogoPath}) {
+    return Image.asset(
+      imagePath,
+      height: appLogoSize,
+      width: appLogoSize,
+    );
   }
 
- Widget assetSVGImageView(String path,{Color? color}) => Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: SvgPicture.asset(path,color: color,),
- );
+  Widget assetSVGImageView(String path, {Color? color, double size = appIconSize}) =>
+      SvgPicture.asset(
+        path,
+        color: color,
+        height: size,
+        width: size,
+      );
 }

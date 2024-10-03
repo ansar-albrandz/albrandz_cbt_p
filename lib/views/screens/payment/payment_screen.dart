@@ -27,7 +27,7 @@ class PaymentScreen extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            CustomWidgets.screenTitleView(title: PAYMENTS,icon: Icons.payment_outlined),
+            CustomWidgets.screenTitleView(title: PAYMENTS,icon: transactionsIcon),
             80.height,
             Center(
               child: Text("On Going..."),

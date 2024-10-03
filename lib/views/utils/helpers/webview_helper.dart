@@ -10,6 +10,7 @@ class WebViewHelper extends StatefulWidget {
 }
 
 class _WebViewHelperState extends State<WebViewHelper> {
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -21,8 +22,16 @@ class _WebViewHelperState extends State<WebViewHelper> {
           onProgress: (int progress) {
 
           },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
+          onPageStarted: (String url) {
+            setState(() {
+              isLoading = true;
+            });
+          },
+          onPageFinished: (String url) {
+            setState(() {
+              isLoading = false;
+            });
+          },
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
         ),
@@ -33,6 +42,14 @@ class _WebViewHelperState extends State<WebViewHelper> {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(controller: controller);
+    return Stack(
+      children: [
+        WebViewWidget(controller: controller),
+        isLoading
+            ? const LinearProgressIndicator() // Display a linear loader
+            : const SizedBox()
+      ],
+    );
   }
 }
+

@@ -1,4 +1,5 @@
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:country_picker/country_picker.dart';
@@ -38,7 +39,10 @@ class TextFiledWidgets {
             onTap: onSuffixTap,
               child: Icon(suffixIcon)),
           counterText: counterText,
-          prefixIcon: AppImageView().assetSVGImageView(prefixIcon),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(10),
+            child: AppImageView().assetSVGImageView(prefixIcon,),
+          ),
           contentPadding: EdgeInsets.zero),
     );
   }

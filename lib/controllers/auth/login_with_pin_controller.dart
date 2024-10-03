@@ -57,7 +57,7 @@ class LoginWithPinController extends GetxController {
         (response['response']['message']).toString().showToast();
       } else {
         verifySuccess(false);
-        errorMessage.value = response['response']['message'] ?? 'Login failed';
+        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       verifySuccess(false);

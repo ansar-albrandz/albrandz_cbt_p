@@ -29,7 +29,7 @@ class AboutUsScreen  extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            CustomWidgets.screenTitleView(title: ABOUTE_US,icon: Icons.info),
+            CustomWidgets.screenTitleView(title: ABOUTE_US,icon: aboutUsIcon),
             80.height,
             SizedBox(
               height: screenSize.height,

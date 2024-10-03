@@ -43,10 +43,21 @@ const passwordPinIcon = "assets/icons/pin password.svg";
 const searchIcon = "assets/icons/search.svg";
 const calenderIcon = "assets/icons/reserve for later.svg";
 const homeIcon = "assets/icons/home address.svg";
-const shareIcon = "assets/icons/share.svg";
+const shareIcon = "assets/icons/drawers/share.svg";
+const settingsIcon = "assets/icons/drawers/settings.svg";
+const switchOffOnIcon = "assets/icons/drawers/switch_off_on.svg";
+// drawers
+const aboutUsIcon = "assets/icons/drawers/about_us.svg";
+const contactUsIcon = "assets/icons/drawers/contact_us.svg";
+const notificationIcon = "assets/icons/drawers/notification.svg";
+const transactionsIcon = "assets/icons/drawers/transactions.svg";
+const profileIcon = "assets/icons/drawers/profile.svg";
+const rideHistoryIcon = "assets/icons/drawers/ride_history.svg";
+const savedPlacesIcon = "assets/icons/drawers/saved_places.svg";
+const startToEndRideIcon = "assets/icons/drawers/start_to_end_ride.svg";
+const termsAndPolicyIcon = "assets/icons/drawers/t&c.svg";
 
 /// json paths
-
 const carAnimationPath = "assets/jsons/car.json";
 const successAnimationPath = 'assets/lotties/done.json';
 

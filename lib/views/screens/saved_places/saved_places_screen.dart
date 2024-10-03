@@ -4,6 +4,8 @@ import 'package:albrandz_cbt_p/views/utils/extensions/double_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/constants/constants.dart';
+
 class SavedPlacesScreen extends StatefulWidget {
   const SavedPlacesScreen({super.key});
 
@@ -16,6 +18,7 @@ class _SavedPlacesScreenState extends State<SavedPlacesScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     var view = SavedPlacesWidget(context: context);
+    var customView = CustomWidgets();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -23,7 +26,6 @@ class _SavedPlacesScreenState extends State<SavedPlacesScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: (){
-        
       },child: const Icon(Icons.add_home_outlined),),
       body: Container(
         height: screenSize.height,
@@ -35,7 +37,7 @@ class _SavedPlacesScreenState extends State<SavedPlacesScreen> {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            view.titleView(),
+            CustomWidgets.screenTitleView(title: SAVED_PLACES, icon: savedPlacesIcon),
             (screenSize.height*.10).height,
             Container(
               height: screenSize.height,

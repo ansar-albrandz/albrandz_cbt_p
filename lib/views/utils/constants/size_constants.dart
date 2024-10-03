@@ -4,6 +4,8 @@ const boldTextSize = 18.0;
 const horizontalPadding = 16.0;
 const verticalPadding = 10.0;
 const normalRadiusSize = 8.0;
+const screenHeaderIconSize = 45.0;
+const appIconSize = 25.0;
 
 // border
 const defaultBorderWidth = 1.0;

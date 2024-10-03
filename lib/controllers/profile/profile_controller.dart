@@ -93,8 +93,15 @@ class ProfileController extends GetxController {
         isHeader: true,
       );
       if (response != null && response['response']['status'] == 'success') {
-        getImageStatus(true);
-        imageUri.value = response['body']['photo']['file'];
+
+        String file = response['body']['photo']['file'];
+        if(file.isNotEmpty){
+          imageUri.value = file;
+          getImageStatus(true);
+        }else{
+          getImageStatus(false);
+        }
+
         (response['response']['message']).toString().showToast();
       } else {
         getImageStatus(false);
@@ -115,15 +122,13 @@ class ProfileController extends GetxController {
       );
       if (response != null && response['response']['status'] == 'success') {
         uploadImageStatus(true);
-        Get.snackbar('Success', 'Image uploaded successfully');
+        'Image uploaded successfully'.showToast();
       } else {
         uploadImageStatus(false);
-        Get.snackbar('Error',
-            response['response']['message'] ?? 'Failed to upload profile image');
+        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       uploadImageStatus(false);
-      Get.snackbar('Error', 'An error occurred: $error');
     }
   }
 

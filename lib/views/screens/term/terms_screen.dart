@@ -29,7 +29,7 @@ class TermsScreen extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            CustomWidgets.screenTitleView(title: TERM_CONDITIONS,icon: Icons.edit_document),
+            CustomWidgets.screenTitleView(title: TERM_CONDITIONS,icon: termsAndPolicyIcon),
             80.height,
             SizedBox(
               height: screenSize.height,

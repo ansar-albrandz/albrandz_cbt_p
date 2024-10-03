@@ -29,7 +29,7 @@ class ContactUsScreen extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            CustomWidgets.screenTitleView(title: CONTACT_US,icon: Icons.contact_support),
+            CustomWidgets.screenTitleView(title: CONTACT_US,icon: contactUsIcon),
             80.height,
             SizedBox(
               height: screenSize.height,

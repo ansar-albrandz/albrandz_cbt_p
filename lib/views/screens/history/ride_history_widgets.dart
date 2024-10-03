@@ -1,5 +1,8 @@
+import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
+import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -46,12 +49,8 @@ class RideHistoryWidgets {
               ),
               Row(
                 children: [
-                  SvgPicture.asset(
-                    'assets/sidedotsss.svg',
-                    width: 35,
-                    height: 35,
-                  ),
-                  SizedBox(width: 10),
+                  AppImageView().assetSVGImageView(startToEndRideIcon,size: 40),
+                  10.width,
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,6 +59,7 @@ class RideHistoryWidgets {
                           "Al Nahada -1 Dubai, United Arab Emirates",
                           style: AppTextStyle.normalBlack(),
                         ),
+                        10.height,
                         Text(
                           "2130 St - Part Saeed, Dubai, UAE",
                           style: AppTextStyle.normalBlack(),

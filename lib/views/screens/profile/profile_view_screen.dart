@@ -111,11 +111,15 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                   }):ButtonWidgets()
                       .appButtonFillView(UPLOAD, width: width,onTap: ()async{
                         LoaderBuilder(context: context).showFullScreenLoader();
-                        await profileController.updateProfilePicture(File(takeImageController.selectedImagePath.value));
-                        LoaderBuilder(context: context).dismissLoader();
-                        if(profileController.uploadImageStatus.value){
-                          context.onBackPressed;
+                        if(profileController.imageUri.isNotEmpty){
+                          await profileController.updateProfilePicture(File(takeImageController.selectedImagePath.value));
+                        }else{
+                          await profileController.uploadProfilePicture(File(takeImageController.selectedImagePath.value));
                         }
+                        LoaderBuilder(context: context).dismissLoader();
+                        // if(profileController.uploadImageStatus.value || profileController.updateImageStatus.value){
+                        //   context.onBackPressed;
+                        // }
                   }),
                   50.height
                 ],

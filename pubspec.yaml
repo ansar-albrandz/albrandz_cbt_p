@@ -81,6 +81,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/drawers/
     - assets/lotties/
     - assets/jsons/
     - assets/cars/

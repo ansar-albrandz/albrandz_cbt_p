@@ -88,32 +88,32 @@ class HomeScreen extends StatelessWidget {
                   view.searchView(),
                   view.drawerListItemView(
                       title: "Recents",
-                      prefixIcon: Icons.calendar_month,
+                      prefixIcon: calenderIcon,
                       color: semiBoldBlackTextColor),
                   view.drawerListItemView(
-                      title: SAVE_PLACES,
-                      prefixIcon: Icons.star_border,
+                      title: SAVED_PLACES,
+                      prefixIcon: savedPlacesIcon,
                       color: semiBoldBlackTextColor,onTap: (){
                         context.toNext(const SavedPlacesScreen());
                   }),
                   10.height,
-                  view.suggestionTitleView(),
-                  10.height,
-                  SizedBox(
-                    height: height * .13,
-                    child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: suggestions.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3),
-                        itemBuilder: (_, index) {
-                          return view.suggestionItemView(
-                              title: suggestions[index]['title'].toString(),
-                              imagePath:
-                                  suggestions[index]['image'].toString());
-                        }),
-                  ),
+                  // view.suggestionTitleView(),
+                  // 10.height,
+                  // SizedBox(
+                  //   height: height * .13,
+                  //   child: GridView.builder(
+                  //       physics: const NeverScrollableScrollPhysics(),
+                  //       itemCount: suggestions.length,
+                  //       gridDelegate:
+                  //           const SliverGridDelegateWithFixedCrossAxisCount(
+                  //               crossAxisCount: 3),
+                  //       itemBuilder: (_, index) {
+                  //         return view.suggestionItemView(
+                  //             title: suggestions[index]['title'].toString(),
+                  //             imagePath:
+                  //                 suggestions[index]['image'].toString());
+                  //       }),
+                  // ),
                   SizedBox(
                     height: height * .15,
                     child: ListView.separated(

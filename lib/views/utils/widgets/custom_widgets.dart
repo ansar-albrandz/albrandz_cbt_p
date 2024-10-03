@@ -1,3 +1,5 @@
+import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/size_constants.dart';
@@ -30,20 +32,17 @@ class CustomWidgets {
     );
   }
 
-  static Widget screenTitleView({required String title,required IconData icon}) => Padding(
+  static Widget screenTitleView({required String title,required String icon}) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
     child: Align(
       alignment: Alignment.topRight,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-           Icon(
-            icon,
-            size: 50,
-          ),
+           AppImageView().assetSVGImageView(icon,color: primaryColor,size: screenHeaderIconSize),
           Text(
             title,
-            style: AppTextStyle.boldBlack(),
+            style: AppTextStyle.boldBlack(color: primaryColor),
           ),
         ],
       ),

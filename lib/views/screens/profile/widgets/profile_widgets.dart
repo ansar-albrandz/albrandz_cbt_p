@@ -54,7 +54,10 @@ class ProfileWidgets {
               fillColor: Colors.grey.shade200,
               filled: true,
               contentPadding: EdgeInsets.zero,
-              prefixIcon: AppImageView().assetSVGImageView(genderIcon),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(10),
+                child: AppImageView().assetSVGImageView(genderIcon),
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadiusSize),
                 borderSide: BorderSide.none,
