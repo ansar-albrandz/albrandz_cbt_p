@@ -1,4 +1,7 @@
 import 'package:albrandz_cbt_p/views/utils/borders/app_border_radius.dart';
+import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
@@ -35,5 +38,37 @@ class AppDialogHelper {
               title:  Text(title,style: AppTextStyle.boldBlack(),),
               content:  Text(message,style: AppTextStyle.normalBlack()),
             ));
+  }
+
+  static showCustomBottomSheet(BuildContext context,{required Widget child}){
+    var width = context.fullWidth;
+    return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius:AppBorderRadius.only(topRight: sheetBorderRadiusSize,topLeft: sheetBorderRadiusSize)
+      ),
+        context: context, builder: (_){
+      return Container(
+        width: width,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: AppBorderRadius.only(topRight: sheetBorderRadiusSize,topLeft: sheetBorderRadiusSize)
+        ),
+        child: Column(
+          children: [
+            10.height,
+            Container(
+              width: 90,
+              height: 6,
+              decoration: BoxDecoration(
+                color: disableBorderColor,
+                borderRadius: AppBorderRadius.all()
+              ),
+            ),
+            10.height,
+            Expanded(child: child)
+          ],
+        ),
+      );
+    });
   }
 }

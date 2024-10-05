@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:albrandz_cbt_p/models/profile/create_profile_model.dart';
 import 'package:albrandz_cbt_p/models/profile/profile_model.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
@@ -31,12 +29,10 @@ class ProfileController extends GetxController {
         }else{
           isProfileLoading(true);
         }
-
         isLoading(true);
       } else {
         isProfileLoading(false);
         isLoading(false);
-        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       isLoading(false);
@@ -102,7 +98,6 @@ class ProfileController extends GetxController {
           getImageStatus(false);
         }
 
-        (response['response']['message']).toString().showToast();
       } else {
         getImageStatus(false);
       }

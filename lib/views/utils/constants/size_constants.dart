@@ -11,6 +11,7 @@ const appIconSize = 25.0;
 const defaultBorderWidth = 1.0;
 const enableBorderWidth = 1.1;
 const borderRadiusSize = 6.0;
+const sheetBorderRadiusSize = 20.0;
 
 // height and width
 const otpFieldHeight = 50.0;

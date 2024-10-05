@@ -66,8 +66,15 @@ const carAnimationPath = "assets/jsons/car.json";
 const successAnimationPath = 'assets/lotties/done.json';
 
 /// cars
-const rentalCarImagePath = "assets/cars/rental_car.png";
 const rideCarImagePath = "assets/cars/ride_car.png";
+const oneCarImagePath = "assets/cars/1.png";
+const twoCarImagePath = "assets/cars/2.png";
+const threeCarImagePath = "assets/cars/3.png";
+const fourCarImagePath = "assets/cars/4.png";
+const fiveCarImagePath = "assets/cars/5.png";
+const sixCarImagePath = "assets/cars/6.png";
+const sevenCarImagePath = "assets/cars/7.png";
+const eightCarImagePath = "assets/cars/8.png";
 
 /// banners
 const banner1Path = "assets/banners/banner1.png";
