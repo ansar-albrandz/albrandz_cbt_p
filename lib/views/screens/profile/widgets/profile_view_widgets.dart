@@ -81,7 +81,7 @@ class ProfileViewWidgets {
         leading: _assetImage(leadingIcon),
         title: Text(
           title,
-          style: AppTextStyle.semiBoldBlack(textSize: 16),
+          style: AppTextStyle.semiBoldBlack(),
         ),
         trailing: trailingButton);
   }

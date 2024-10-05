@@ -13,6 +13,7 @@ import 'package:albrandz_cbt_p/views/screens/term/terms_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/helpers/share_link_helper.dart';
@@ -39,6 +40,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   void initState() {
     super.initState();
     _profileController.getProfile();
+    _profileController.getProfilePicture();
   }
 
   @override
@@ -61,67 +63,70 @@ class _DrawerScreenState extends State<DrawerScreen> {
         ),
         drawer: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                view.drawerListItemView(
-                    title: PROFILE,
-                    prefixIcon: profileIcon,
-                    onTap: () {
-                      context.toNext(const ProfileViewScreen());
-                    }),
-                view.drawerListItemView(
-                    title: SAVED_PLACES,
-                    prefixIcon: savedPlacesIcon,
-                    onTap: () {
-                      context.toNext(const SavedPlacesScreen());
-                    }),
-                view.drawerListItemView(
-                    title: RIDE_HISTORIES,
-                    prefixIcon: rideHistoryIcon,
-                    onTap: () {
-                      context.toNext(const RideHistoryScreen());
-                    }),
-                view.drawerListItemView(
-                    title: PAYMENTS,
-                    prefixIcon: transactionsIcon,
-                    onTap: () {
-                      context.toNext(PaymentScreen());
-                    }),
-                view.drawerListItemView(
-                    title: NOTIFICATIONS,
-                    prefixIcon: notificationIcon,
-                    onTap: () {
-                      context.toNext(const NotificationScreen());
-                    }),
-                view.drawerListItemView(
-                    title: TERM_CONDITIONS,
-                    prefixIcon: termsAndPolicyIcon,
-                    onTap: () {
-                      context.toNext(const TermsScreen());
-                    }),
-                view.drawerListItemView(
-                    title: CONTACT_US,
-                    prefixIcon: contactUsIcon,
-                    onTap: () {
-                      context.toNext(const ContactUsScreen());
-                    }),
-                view.drawerListItemView(
-                    title: ABOUTE_US,
-                    prefixIcon: aboutUsIcon,
-                    onTap: () {
-                      context.toNext(const AboutUsScreen());
-                    }),
-                view.drawerListItemView(
-                    title: LOGOUT,
-                    prefixIcon: switchOffOnIcon,
-                    onTap: () {
-                      view.showLogoutDialog();
-                    }),
-                20.height,
-                view.drawerFooterView(_appInfoController,onShareTap: (){
-                  ShareLinkHelper.shareLink(aboutUsUrl);
-                }),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Column(
+                children: [
+                  view.drawerListItemView(
+                      title: PROFILE,
+                      prefixIcon: profileIcon,
+                      onTap: () {
+                        context.toNext(const ProfileViewScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: SAVED_PLACES,
+                      prefixIcon: savedPlacesIcon,
+                      onTap: () {
+                        context.toNext(const SavedPlacesScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: RIDE_HISTORIES,
+                      prefixIcon: rideHistoryIcon,
+                      onTap: () {
+                        context.toNext(const RideHistoryScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: PAYMENTS,
+                      prefixIcon: transactionsIcon,
+                      onTap: () {
+                        context.toNext(PaymentScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: NOTIFICATIONS,
+                      prefixIcon: notificationIcon,
+                      onTap: () {
+                        context.toNext(const NotificationScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: TERM_CONDITIONS,
+                      prefixIcon: termsAndPolicyIcon,
+                      onTap: () {
+                        context.toNext( TermsScreen(url: termConditionUrl,title: "Terms And Conditions",));
+                      }),
+                  view.drawerListItemView(
+                      title: CONTACT_US,
+                      prefixIcon: contactUsIcon,
+                      onTap: () {
+                        context.toNext(const ContactUsScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: ABOUTE_US,
+                      prefixIcon: aboutUsIcon,
+                      onTap: () {
+                        context.toNext(const AboutUsScreen());
+                      }),
+                  view.drawerListItemView(
+                      title: LOGOUT,
+                      prefixIcon: switchOffOnIcon,
+                      onTap: () {
+                        view.showLogoutDialog();
+                      }),
+                  20.height,
+                  view.drawerFooterView(_appInfoController,onShareTap: (){
+                    ShareLinkHelper.shareLink(aboutUsUrl);
+                  }),
+                ],
+              ),
             ),
           ),
         ),

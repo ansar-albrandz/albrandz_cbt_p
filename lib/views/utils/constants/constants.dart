@@ -31,6 +31,8 @@ const OK = "Ok";
 const ADD_CARD = "Add Card";
 const ADD_NEW_CARD = "Add new card";
 const UPLOAD = "Upload";
+const BOOK_NOW = "Book Now";
+const SCHEDULE = "Schedule";
 
 // service
 
@@ -77,6 +79,7 @@ const CONTACT_US = 'Contact Us & FAQs';
 const ABOUTE_US = 'About Us';
 const SHARE = 'Share';
 const APP_VERSION = 'Version';
+const SUGGESTIONS = 'Suggestions';
 
 
 // text fields

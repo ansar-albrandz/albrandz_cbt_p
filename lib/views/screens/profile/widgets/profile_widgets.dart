@@ -1,8 +1,12 @@
+import 'package:albrandz_cbt_p/views/screens/term/terms_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/builders/app_country_code_builder.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
+import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
+import 'package:albrandz_cbt_p/views/utils/helpers/webview_helper.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/text_filed_widgets.dart';
@@ -105,6 +109,7 @@ class ProfileWidgets {
                   fontWeight: FontWeight.bold, color: primaryColor),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
+                context.toNext( TermsScreen(title: "Terms And Condition",url: termConditionUrl,));
                   print("Terms of Use tapped");
                 },
             ),
@@ -115,6 +120,7 @@ class ProfileWidgets {
                   fontWeight: FontWeight.bold, color: primaryColor),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
+                  context.toNext( TermsScreen(title: "Privacy Policy",url: policyUrl,));
                   print("Privacy Policy tapped");
                 },
             ),

@@ -26,9 +26,8 @@ const uploadProfilePictureEndPoint = "photo";
 const updateProfilePictureEndPoint = "photo";
 const getProfilePictureEndPoint = "photo";
 
-
 // web urls
-
-const termConditionUrl = "https://cabike.in/";
-const contactUrl = "https://cabike.in/";
-const aboutUsUrl = "https://cabike.in/";
+const termConditionUrl = "http://seca-india.com/cabo-landing/terms-conditions.html";
+const policyUrl = "http://seca-india.com/cabo-landing/privacy-policy.html";
+const aboutUsUrl = "http://seca-india.com/cabo-landing/index.html#tab-splash";
+const contactUrl = "http://seca-india.com/cabo-landing/index.html#contact";

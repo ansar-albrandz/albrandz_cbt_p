@@ -27,6 +27,7 @@ class HomeWidgets {
     return Column(
       children: [
         ListTile(
+          contentPadding: EdgeInsets.zero,
             leading: AppImageView().assetSVGImageView(prefixIcon,color: color),
             trailing: Icon(trailingIcon, color: color, size: appIconSize),
             title: Text(
@@ -45,18 +46,22 @@ class HomeWidgets {
   }
 
   Widget searchView({void Function(String)? onChanged,void Function()? onSuffixTap}) {
-    return TextFiledWidgets().appTextFieldView(TextEditingController(),
-        prefixIcon: searchIcon,
-        onChanged: onChanged,
-        hintText: "Where to go...",
-        onSuffixTap: onSuffixTap,
-        suffixIcon: Icons.arrow_forward);
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: AppBorderRadius.all()
+      ),
+      child: TextFiledWidgets().appTextFieldView(TextEditingController(),
+          prefixIcon: searchIcon,
+          onChanged: onChanged,
+          hintText: "Where to go...",
+          onSuffixTap: onSuffixTap,
+          suffixIcon: Icons.arrow_forward),
+    );
   }
 
   Widget drawerFooterView(AppInfoController controller,{void Function()? onShareTap}) {
-
     return Padding(
-      padding: const EdgeInsets.all(horizontalPadding),
+      padding: const EdgeInsets.symmetric(horizontal: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -82,32 +87,31 @@ class HomeWidgets {
     );
   }
 
-  Widget suggestionTitleView()=>Text("Suggestions",style: AppTextStyle.boldBlack(),);
+  Widget suggestionTitleView()=>Text(SUGGESTIONS,style: AppTextStyle.boldBlack(textSize: boldTextSize-2),);
 
   Widget suggestionItemView({required String title, required String imagePath}){
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.all()
-          ),
           color: Colors.white,
-          surfaceTintColor: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(verticalPadding),
-            child: Image.asset(
-              imagePath,
-              height: 60,
-              width: 120,
-            ),
-          ),
-        ),
+            elevation: 5,
+            child: Padding(
+          padding: const EdgeInsets.all(horizontalPadding),
+          child: Center(child: cardView(imagePath)),
+        )),
         Text(
           title,
-          style: AppTextStyle.boldBlack(textSize: 14),
+          style: AppTextStyle.boldBlack(textSize: boldTextSize-4),
         ),
       ],
     );
+  }
+
+  Widget cardView(String imagePath){
+    return Image.asset(imagePath,height: 60,
+      width: 100,);
   }
 
   showLogoutDialog(){

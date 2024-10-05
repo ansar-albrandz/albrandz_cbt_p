@@ -1,7 +1,9 @@
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/home/widgets/home_widgets.dart';
+import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/saved_places/saved_places_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
@@ -15,16 +17,10 @@ import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   final AdvancedDrawerController controller;
-   HomeScreen({super.key, required this.controller});
+  HomeScreen({super.key, required this.controller});
 
   final banners = [banner1Path, banner2Path, banner3Path];
-
-  final suggestions = [
-    {"title": "Ride", "image": rideCarImagePath},
-    {"title": "Rental", "image": rentalCarImagePath},
-    {"title": "Reserve", "image": calenderImagePath}
-  ];
-  var profileController = Get.put(ProfileController());
+  final profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +30,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Obx(() => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              getGreetingBasedOnTime(),
-              style: AppTextStyle.boldWhite(textSize: 14),
-            ),
-            Text(
-              profileController.profileData.value.name ?? "NA",
-              style: AppTextStyle.boldWhite(textSize: 20),
-            )
-          ],
-        )),
         leading: Builder(
           builder: (context) => Padding(
             padding: const EdgeInsets.all(10.0),
@@ -73,65 +56,109 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AppImageView.screenBackgroundImageView(
-                path: homeImagePath, size: Size(width, height * .25)),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: horizontalPadding, vertical: verticalPadding),
-              child: ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                AppImageView.screenBackgroundImageView(
+                    path: homeImagePath, size: Size(width, height * .25)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: horizontalPadding, vertical: verticalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      20.height,
+                      view.searchView(),
+                      view.drawerListItemView(
+                          title: "Recents",
+                          prefixIcon: calenderIcon,
+                          color: semiBoldBlackTextColor),
+                      view.drawerListItemView(
+                          title: SAVED_PLACES,
+                          prefixIcon: savedPlacesIcon,
+                          color: semiBoldBlackTextColor,
+                          onTap: () {
+                            context.toNext(const SavedPlacesScreen());
+                          }),
+                      10.height,
+                      view.suggestionTitleView(),
+                      10.height,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: view.suggestionItemView(
+                                title: BOOK_NOW, imagePath: rideCarImagePath),
+                          ),
+                          10.width,
+                          Expanded(
+                            child: view.suggestionItemView(
+                                title: SCHEDULE, imagePath: "assets/cars/schedule_ride.png"),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(banners.length, (index) {
+                      return Image.asset(
+                        banners[index],
+                        height: height * .15,
+                        width: width - 20,
+                      );
+                    }),
+                  ),
+                ),
+                10.height,
+              ],
+            ),
+          ),
+          Positioned(
+              top: height * .13,
+              right: 16,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  view.searchView(),
-                  view.drawerListItemView(
-                      title: "Recents",
-                      prefixIcon: calenderIcon,
-                      color: semiBoldBlackTextColor),
-                  view.drawerListItemView(
-                      title: SAVED_PLACES,
-                      prefixIcon: savedPlacesIcon,
-                      color: semiBoldBlackTextColor,onTap: (){
-                        context.toNext(const SavedPlacesScreen());
-                  }),
-                  10.height,
-                  // view.suggestionTitleView(),
-                  // 10.height,
-                  // SizedBox(
-                  //   height: height * .13,
-                  //   child: GridView.builder(
-                  //       physics: const NeverScrollableScrollPhysics(),
-                  //       itemCount: suggestions.length,
-                  //       gridDelegate:
-                  //           const SliverGridDelegateWithFixedCrossAxisCount(
-                  //               crossAxisCount: 3),
-                  //       itemBuilder: (_, index) {
-                  //         return view.suggestionItemView(
-                  //             title: suggestions[index]['title'].toString(),
-                  //             imagePath:
-                  //                 suggestions[index]['image'].toString());
-                  //       }),
-                  // ),
-                  SizedBox(
-                    height: height * .15,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: banners.length,
-                      itemBuilder: (_, index) {
-                        return Image.asset(banners[index]);
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return 10.width;
-                      },
-                    ),
-                  )
+                 Obx(()=>InkWell(
+                   onTap: (){
+                     context.toNext(const ProfileViewScreen());
+                   },
+                   child: Container(
+                       height: profileImageSize-30,
+                       width: profileImageSize-30,
+                       decoration: BoxDecoration(
+                         border: Border.all(width: defaultBorderWidth),
+                           color: Colors.grey.shade200,
+                           borderRadius:
+                           BorderRadius.circular((profileImageSize-30) / 2)),
+                       child: profileController.imageUri.value.isEmpty
+                           ?  CircleAvatar(
+                         backgroundColor: Colors.grey.shade200,
+                         child: const Icon(Icons.person,
+                             size: 60, color: Colors.grey),
+                       )
+                           : CircleAvatar(
+                         backgroundImage: NetworkImage(FILE_PATH_URL +
+                             profileController.imageUri.value),
+                       )),
+                 )),
+                  5.height,
+                  Text(
+                    getGreetingBasedOnTime(),
+                    style: AppTextStyle.boldBlack(textSize: normalTextSize,color: primaryColor),
+                  ),
+                  Obx(()=>Text(
+                    profileController.profileData.value.name ?? "NA",
+                    style: AppTextStyle.boldBlack(textSize: boldTextSize-2,color: primaryColor),
+                  ))
                 ],
-              ),
-            )
-          ],
-        ),
+              )),
+        ],
       ),
     );
   }

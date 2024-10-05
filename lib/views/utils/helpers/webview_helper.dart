@@ -17,6 +17,7 @@ class _WebViewHelperState extends State<WebViewHelper> {
     super.initState();
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse(widget.url))
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
@@ -31,25 +32,35 @@ class _WebViewHelperState extends State<WebViewHelper> {
             setState(() {
               isLoading = false;
             });
+
+            controller.runJavaScript(
+                """
+                document.querySelector('.appie-page-title-area.appie-page-service-title-area').style.display='none';
+                document.querySelector('.appie-header-area.appie-sticky').style.display='none';
+                document.querySelector('.appie-footer-area').style.display='none';
+                """
+            );
           },
-          onHttpError: (HttpResponseError error) {},
+          onHttpError: (HttpResponseError error) {
+            print(error.response?.statusCode);
+          },
           onWebResourceError: (WebResourceError error) {},
         ),
-      )
-      ..loadRequest(Uri.parse(widget.url));
+      );
+
   }
   var controller = WebViewController();
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        WebViewWidget(controller: controller),
-        isLoading
-            ? const LinearProgressIndicator() // Display a linear loader
-            : const SizedBox()
-      ],
-    );
+    return  Stack(
+        children: [
+          WebViewWidget(controller: controller),
+          isLoading
+              ? const LinearProgressIndicator() // Display a linear loader
+              : const SizedBox()
+        ],
+      );
   }
 }
 

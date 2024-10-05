@@ -19,6 +19,7 @@ const submittedSuccessImagePath = "assets/images/submitted_successfully.webp";
 const termsConditionImagePath = "assets/images/terms_&_condition_bg.png";
 const verifyOTPImagePath = "assets/images/verify.webp";
 const calenderImagePath = "assets/images/calender_image.png";
+const scheduleRidePath = "assets/images/schedule_ride.png";
 
 /// images paths
 
