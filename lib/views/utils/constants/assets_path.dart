@@ -18,7 +18,7 @@ const splashImagePath = "assets/images/splash_screen.webp";
 const submittedSuccessImagePath = "assets/images/submitted_successfully.webp";
 const termsConditionImagePath = "assets/images/terms_&_condition_bg.png";
 const verifyOTPImagePath = "assets/images/verify.webp";
-const calenderImagePath = "assets/images/calender_image.png";
+const calenderImagePath = "assets/cars/schedule_ride.png";
 const scheduleRidePath = "assets/images/schedule_ride.png";
 
 /// images paths
@@ -31,10 +31,13 @@ const addCardIcon = "assets/icons/ad card.svg";
 const emailIdIcon = "assets/icons/email id.svg";
 const dobIcon = "assets/icons/DOB.svg";
 const genderIcon = "assets/icons/gender.svg";
+const expiryDateIcon = "assets/icons/expiry date.svg";
+const expiryTimeIcon = "assets/icons/expiry time.svg";
 const callIcon = "assets/icons/call.svg";
 const contactDetailsIcon = "assets/icons/contact details.svg";
 const countryGlobIcon = "assets/icons/country.svg";
 const creditCardIcon = "assets/icons/credit card.svg";
+const cvvIcon = "assets/icons/cvv.svg";
 const distanceIcon = "assets/icons/distance travel.svg";
 const documentIcon = "assets/icons/documents.svg";
 const driverDocumentIcon = "assets/icons/driver documents.svg";

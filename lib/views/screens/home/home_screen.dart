@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      20.height,
+                      60.height,
                       view.searchView(),
                       view.drawerListItemView(
                           title: "Recents",
@@ -94,13 +94,14 @@ class HomeScreen extends StatelessWidget {
                           10.width,
                           Expanded(
                             child: view.suggestionItemView(
-                                title: SCHEDULE, imagePath: "assets/cars/schedule_ride.png"),
+                                title: SCHEDULE, imagePath: calenderImagePath),
                           ),
                         ],
                       )
                     ],
                   ),
                 ),
+                10.height,
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -119,7 +120,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: height * .13,
+              top: height * .15,
               right: 16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,

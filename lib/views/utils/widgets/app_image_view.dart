@@ -5,23 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/size_constants.dart';
 
 class AppImageView {
-  static Widget backGroundAssetImage(
-      {required String path, required Widget child, required Size size}) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: size.height,
-            width: size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(path), fit: BoxFit.fill),
-            ),
-          ),
-          child
-        ],
-      ),
-    );
-  }
 
   static screenBackgroundImageView({required String path, required Size size}) {
     return Container(

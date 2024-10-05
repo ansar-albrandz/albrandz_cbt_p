@@ -4,8 +4,8 @@ import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
+import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/profile/take_image_controller.dart';
 import '../../../utils/constants/constants.dart';
@@ -78,18 +78,13 @@ class ProfileViewWidgets {
       IconButton? trailingButton}) {
     return ListTile(
         contentPadding: EdgeInsets.zero,
-        leading: _assetImage(leadingIcon),
+        leading: AppImageView().assetSVGImageView(leadingIcon,size: 30),
         title: Text(
           title,
-          style: AppTextStyle.semiBoldBlack(),
+          style: AppTextStyle.boldBlack(textSize: normalTextSize,color: semiBoldBlackTextColor),
         ),
         trailing: trailingButton);
   }
-
-  Widget _assetImage(String path) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset(path),
-      );
 
   Widget lineView() => const Divider(
         thickness: 1,

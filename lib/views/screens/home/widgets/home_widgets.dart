@@ -101,6 +101,7 @@ class HomeWidgets {
           padding: const EdgeInsets.all(horizontalPadding),
           child: Center(child: cardView(imagePath)),
         )),
+        5.height,
         Text(
           title,
           style: AppTextStyle.boldBlack(textSize: boldTextSize-4),

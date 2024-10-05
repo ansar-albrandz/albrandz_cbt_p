@@ -92,3 +92,9 @@ const EMAIL_ID_TITLE = "Email Id";
 const DATE_OF_BIRTH_TITLE = "Date of birth";
 const GENDER_TITLE = "Gender";
 const AUTHORIZATION = "Authorization";
+// card
+const DEBIT_CREDIT_CARD_NO = "Debit Or Card No";
+const EXPIRY_DATE = "Expiry Date";
+const CVV = "CVV";
+const COUNTRY = "Country";
+const NAME_ON_CARD = "Name On Card (Optional)";
