@@ -12,6 +12,7 @@ class RideMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = context.fullWidth;
+    var height = context.fullHeight;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
@@ -19,7 +20,7 @@ class RideMapScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ButtonWidgets().appButtonFillView(NEXT,onTap: (){
-              AppDialogHelper.showCustomBottomSheet(context,child: CabSelectionScreen());
+             AppDialogHelper.showCustomBottomSheet(context,child: const CabSelectionScreen(),height: height/1.2);
             },width: width)
           ],
         ),

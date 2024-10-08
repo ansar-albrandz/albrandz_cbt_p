@@ -31,7 +31,6 @@ class AuthController extends GetxController {
         otpSent(true);
       } else {
         otpSent(false);
-        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       otpSent(false);
@@ -78,7 +77,6 @@ class AuthController extends GetxController {
       );
       if (response != null && response['response']['status'] == 'success') {
         isOTPResend(true);
-        (response['response']['message']).toString().showToast();
       } else {
         isOTPResend(false);
       }
@@ -95,7 +93,6 @@ class AuthController extends GetxController {
       final response = await _apiController.get(logoutEndPoint,isHeader: true);
       if (response != null && response['response']['status'] == 'success') {
         isLoggedOut(true);
-        (response['response']['message']).toString().showToast();
       } else {
         isLoggedOut(false);
       }

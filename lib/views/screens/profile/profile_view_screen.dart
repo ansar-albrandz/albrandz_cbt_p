@@ -11,11 +11,8 @@ import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
-import 'package:albrandz_cbt_p/views/utils/extensions/string_extensions.dart';
-import 'package:albrandz_cbt_p/views/utils/helpers/app_dialog_helper.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/button_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -131,29 +128,29 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,size: 22,))),
                           view.lineView(),
-                          Column(
-                            children: List.generate(1, (index) {
-                              return Column(
-                                children: [
-                                  view.infoFieldView(
-                                      title: "1234567890123456".replaceItems(
-                                          items: 12,
-                                          replace: "#### #### #### ")+"   City Bank",
-                                      leadingIcon: creditCardIcon,
-                                      trailingButton: IconButton(
-                                          onPressed: () {
-                                            AppDialogHelper().showCustomDialog(context, onPressed: (){}, title: "Remove Card!", message: "Do you want remove the card?");
-                                          },
-                                          icon: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Icon(
-                                                CupertinoIcons.delete_simple,size: 20),
-                                          ))),
-                                  view.lineView()
-                                ],
-                              );
-                            }),
-                          ),
+                          // Column(
+                          //   children: List.generate(1, (index) {
+                          //     return Column(
+                          //       children: [
+                          //         view.infoFieldView(
+                          //             title: "1234567890123456".replaceItems(
+                          //                 items: 12,
+                          //                 replace: "#### #### #### ")+"   City Bank",
+                          //             leadingIcon: creditCardIcon,
+                          //             trailingButton: IconButton(
+                          //                 onPressed: () {
+                          //                   AppDialogHelper().showCustomDialog(context, onPressed: (){}, title: "Remove Card!", message: "Do you want remove the card?");
+                          //                 },
+                          //                 icon: const Padding(
+                          //                   padding: EdgeInsets.all(8.0),
+                          //                   child: Icon(
+                          //                       CupertinoIcons.pen,size: 20),
+                          //                 ))),
+                          //         view.lineView()
+                          //       ],
+                          //     );
+                          //   }),
+                          // ),
                           view.infoFieldView(
                               title: ADD_CARD,
                               leadingIcon: creditCardIcon,

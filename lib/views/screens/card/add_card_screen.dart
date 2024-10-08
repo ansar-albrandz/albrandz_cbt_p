@@ -40,6 +40,7 @@ class AddCardScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    20.height,
                     view.titleView(ADD_CARD),
                     20.height,
                     view.fieldTitleTextView(DEBIT_CREDIT_CARD_NO),

@@ -14,7 +14,10 @@ class AppTheme {
       elevatedButtonTheme: _buttonThemeData(),
       floatingActionButtonTheme: _floatingActionButtonThemeData,
       dialogTheme: _dialogTheme(),
-    inputDecorationTheme: _inputDecorations()
+    inputDecorationTheme: _inputDecorations(),
+    datePickerTheme: const DatePickerThemeData(
+      backgroundColor: Colors.white
+    )
   );
 
   AppBarTheme _appBarTheme() =>

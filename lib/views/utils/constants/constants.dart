@@ -19,6 +19,7 @@ const NEXT = "Next";
 const DONE = "Done";
 const FROM = "From";
 const SURE  = "Sure";
+const CANCEL  = "Cancel";
 const NOT_NOW = "Not Now";
 const TO = "To";
 const YES = "Yes";
@@ -28,11 +29,14 @@ const OR_c = "OR";
 const OR_s = "or";
 const AND_s = "and";
 const OK = "Ok";
+const PAY = "Pay";
 const ADD_CARD = "Add Card";
 const ADD_NEW_CARD = "Add new card";
 const UPLOAD = "Upload";
 const BOOK_NOW = "Book Now";
 const SCHEDULE = "Schedule";
+const CALL = "Call";
+const MESSAGE = "Message";
 
 // service
 
@@ -60,6 +64,7 @@ const CREATE_PROFILE_SUCCESS_MESSAGE = "Your Profile has been created successful
 
 const INITAL_COUNTRY_CODE = "+91";
 const INITAL_COUNTRY_FLAG = "IN";
+const INITAL_MOBILE_NUMBER = "7321871559";
 
 // titles
 const CREATE_PROFILE = "Create Profile";
@@ -98,3 +103,16 @@ const EXPIRY_DATE = "Expiry Date";
 const CVV = "CVV";
 const COUNTRY = "Country";
 const NAME_ON_CARD = "Name On Card (Optional)";
+const CASH = "Cash";
+const PIN_FOR_THIS_RIDE = "PIN for this ride";
+const CANCEL_RIDE = "Cancel Ride";
+const CANCELLATION_REASONS = "Cancellation Reasons";
+const CANCELLATION_FARE = "Cancellation Fare";
+const DESTINATION_CHANGE = "Destination Change";
+const TRIP_FARE = "Trip Fare";
+const EXTRA_FARE = "Extra Fare";
+const TOTAL_PAY = "Total Pay";
+const TAX = "Tax";
+
+const cancelReasons  = ["Change of plan","Change of plan","Traffic Jam","Driver's not appropriate"];
+

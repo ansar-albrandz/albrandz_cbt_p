@@ -2,6 +2,7 @@ import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
+import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:flutter/material.dart';
 
 import '../borders/app_border_radius.dart';
@@ -51,6 +52,34 @@ class ButtonWidgets {
     );
   }
 
+  Widget appButtonFillWithIconView(String title,String iconPath, {double? width,double height = defaultHeightOfButton,void Function()? onTap}){
+    return Card(
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(side: const BorderSide(width: 1,color: Colors.grey),borderRadius: AppBorderRadius.circular()),
+      color: primaryColor,
+      child: InkWell(
+        borderRadius: AppBorderRadius.circular(),
+        onTap: onTap,
+        child: SizedBox(
+          height: height,
+          width: width ?? 200,
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppImageView().assetSVGImageView(iconPath),
+                5.width,
+                Text(title,style: AppTextStyle.boldWhite(),)
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
   Widget appButtonFillOutView(String title, {double? width,double height = defaultHeightOfButton,void Function()? onTap}){
     return Card(
       margin: EdgeInsets.zero,
@@ -70,6 +99,33 @@ class ButtonWidgets {
     );
   }
 
+  Widget appButtonFillOutWithIconView(String title,String iconPath, {double? width,double height = defaultHeightOfButton,void Function()? onTap}){
+    return Card(
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(side: const BorderSide(width: 1,color: Colors.grey),borderRadius: AppBorderRadius.circular()),
+      color: Colors.white,
+      child: InkWell(
+        borderRadius: AppBorderRadius.circular(),
+        onTap: onTap,
+        child: SizedBox(
+          height: height,
+          width: width ?? 200,
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppImageView().assetSVGImageView(iconPath),
+                5.width,
+                Text(title,style: AppTextStyle.boldBlack(color: primaryColor),)
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   _buttonBorderRadius()=> RoundedRectangleBorder(
     borderRadius: AppBorderRadius.circular()
   );
@@ -78,15 +134,7 @@ class ButtonWidgets {
     return CircleAvatar(
       radius: 20,
       backgroundColor: Colors.grey.shade400,
-      child: BackButton(
-        // icon: const Icon(
-        //   Icons.arrow_back,
-        //   size: 20,
-        // ),
-        // onPressed: () {
-        //   Get.back();
-        // },
-      ),
+      child: BackButton(),
     );
   }
 }

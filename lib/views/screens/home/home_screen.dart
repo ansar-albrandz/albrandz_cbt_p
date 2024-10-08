@@ -1,6 +1,7 @@
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/home/widgets/home_widgets.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/profile_view_screen.dart';
+import 'package:albrandz_cbt_p/views/screens/rides/ride_map_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/saved_places/saved_places_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/api_paths.dart';
@@ -70,7 +71,9 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       60.height,
-                      view.searchView(),
+                      view.searchView(onSuffixTap: (){
+                        context.toNext(RideMapScreen());
+                      }),
                       view.drawerListItemView(
                           title: "Recents",
                           prefixIcon: calenderIcon,

@@ -1,3 +1,4 @@
+import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class DateTimeBuilder {
@@ -25,6 +26,8 @@ class DateTimeBuilder {
     lastDate ??= firstDate.add(const Duration(days: 365 * 200));
 
     final DateTime? selectedDate = await showDatePicker(
+      cancelText: CANCEL,
+      confirmText: DONE,
       context: context,
       initialDate: initialDate,
       firstDate: firstDate,

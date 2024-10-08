@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="7.265" height="35.265">
+    <defs>
+        <clipPath id="clip-path">
+            <path style="fill:none" d="M0 0h3.632v14.324H0z"/>
+        </clipPath>
+        <style>
+            .cls-3{fill:#bebcbc}
+        </style>
+    </defs>
+    <g id="Group_16247" data-name="Group 16247" transform="translate(-20.5 -332.367)">
+        <g id="line" transform="translate(22.771 343.459)" style="clip-path:url(#clip-path)">
+            <g transform="translate(-128 -133)">
+                <rect id="round" class="cls-3" width="3" height="3" rx="1.5" transform="translate(128 133)"/>
+            </g>
+            <g transform="translate(-128 -124)">
+                <rect id="round-2" data-name="round" class="cls-3" width="3" height="3" rx="1.5" transform="translate(128 133)"/>
+            </g>
+        </g>
+        <rect id="pin" width="7" height="7" rx="3.5" transform="translate(20.5 332.367)" style="fill:#2dbb54"/>
+        <rect id="pin-2" data-name="pin" width="7.265" height="7.265" rx="3.632" transform="translate(20.5 360.367)" style="fill:red"/>
+    </g>
+</svg>

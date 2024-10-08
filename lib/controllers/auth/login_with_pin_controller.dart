@@ -29,7 +29,6 @@ class LoginWithPinController extends GetxController {
 
       if (response != null && response['response']['status'] == 'success') {
         loginSuccess(true);
-        (response['response']['message']).toString().showToast();
       } else {
         errorMessage.value = response['response']['message'] ?? 'Login failed';
       }
@@ -54,10 +53,8 @@ class LoginWithPinController extends GetxController {
         verifySuccess(true);
         var token = response['header'];
         await UserLocalDataController().storeLoginToken(token);
-        (response['response']['message']).toString().showToast();
       } else {
         verifySuccess(false);
-        (response['response']['message']).toString().showToast();
       }
     } catch (error) {
       verifySuccess(false);
@@ -106,9 +103,7 @@ class LoginWithPinController extends GetxController {
 
       if (response != null && response['response']['status'] == 'success') {
         forgetPinSuccess(true);
-        (response['response']['message']).toString().showToast();
       } else {
-        errorMessage.value = response['response']['message'] ?? 'PIN reset failed';
       }
     } catch (error) {
       errorMessage.value = 'An error occurred: $error';

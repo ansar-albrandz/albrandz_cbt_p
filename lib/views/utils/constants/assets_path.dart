@@ -20,6 +20,7 @@ const termsConditionImagePath = "assets/images/terms_&_condition_bg.png";
 const verifyOTPImagePath = "assets/images/verify.webp";
 const calenderImagePath = "assets/cars/schedule_ride.png";
 const scheduleRidePath = "assets/images/schedule_ride.png";
+const searchCabImagePath = "assets/images/searching_cab.png";
 
 /// images paths
 
@@ -34,6 +35,9 @@ const genderIcon = "assets/icons/gender.svg";
 const expiryDateIcon = "assets/icons/expiry date.svg";
 const expiryTimeIcon = "assets/icons/expiry time.svg";
 const callIcon = "assets/icons/call.svg";
+const messageIcon = "assets/icons/message.svg";
+const pickupIcon = "assets/icons/pickup.svg";
+const destinationIcon = "assets/icons/destination.svg";
 const contactDetailsIcon = "assets/icons/contact details.svg";
 const countryGlobIcon = "assets/icons/country.svg";
 const creditCardIcon = "assets/icons/credit card.svg";
@@ -42,6 +46,7 @@ const distanceIcon = "assets/icons/distance travel.svg";
 const documentIcon = "assets/icons/documents.svg";
 const driverDocumentIcon = "assets/icons/driver documents.svg";
 const editProfileIcon = "assets/icons/edit.svg";
+const cashIcon = "assets/icons/cash.svg";
 const profileNameIcon = "assets/icons/profile full name.svg";
 const passwordPinIcon = "assets/icons/pin password.svg";
 const searchIcon = "assets/icons/search.svg";
@@ -59,6 +64,7 @@ const profileIcon = "assets/icons/drawers/profile.svg";
 const rideHistoryIcon = "assets/icons/drawers/ride_history.svg";
 const savedPlacesIcon = "assets/icons/drawers/saved_places.svg";
 const startToEndRideIcon = "assets/icons/drawers/start_to_end_ride.svg";
+const startToEndThreeRideIcon = "assets/icons/start_end_dot.svg";
 const termsAndPolicyIcon = "assets/icons/drawers/t&c.svg";
 
 /// json paths

@@ -40,15 +40,17 @@ class AppDialogHelper {
             ));
   }
 
-  static showCustomBottomSheet(BuildContext context,{required Widget child}){
+  static showCustomBottomSheet(BuildContext context,{required Widget child,double? height}){
     var width = context.fullWidth;
     return showModalBottomSheet(
+      isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius:AppBorderRadius.only(topRight: sheetBorderRadiusSize,topLeft: sheetBorderRadiusSize)
       ),
         context: context, builder: (_){
       return Container(
         width: width,
+        height: height,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: AppBorderRadius.only(topRight: sheetBorderRadiusSize,topLeft: sheetBorderRadiusSize)
