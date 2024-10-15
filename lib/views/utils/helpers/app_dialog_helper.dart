@@ -26,7 +26,6 @@ class AppDialogHelper {
                     )),
                 // 10.width,
                 TextButton(
-
                     onPressed: () {
                       context.onBackPressed;
                     },

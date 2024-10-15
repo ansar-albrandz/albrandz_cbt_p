@@ -127,13 +127,15 @@ class RideDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
               child: ButtonWidgets().appButtonFillOutView(CANCEL_RIDE,width: width,onTap: (){
-                AppDialogHelper.showCustomBottomSheet(context, child: CancelRideScreen(),height: height/2.4);
+                AppDialogHelper.showCustomBottomSheet(context, child: const CancelRideScreen(),height: height/2.4);
               }),
             ),
             10.height,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
-            child: ButtonWidgets().appButtonFillOutView(DONE,width: width),
+            child: ButtonWidgets().appButtonFillOutView(DONE,width: width,onTap: (){
+              context.onBackPressed;
+            }),
           ),
             20.height,
           ],

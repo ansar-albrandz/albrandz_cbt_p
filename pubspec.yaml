@@ -39,7 +39,7 @@ dependencies:
   intl: any
   fluttertoast: any
   cached_network_image: any
-  connectivity_plus: any
+#  connectivity_plus: ^6.0.5
   shared_preferences: any
   pinput: ^5.0.0
   flutter_svg: ^2.0.10+1

@@ -5,7 +5,7 @@ extension DateExtensions on DateTime {
 
   String get toTimeOnly => DateFormat.jm().format(this);
 
-  String get fullDateAndTime => DateFormat("dd/MM/yyy HH:mm:ss").format(this);
+  String get fullDateAndTime => DateFormat("dd-MM-yyyy HH:mm a ").format(this);
 
   String get toTimeWithSecond => DateFormat("HH:mm:ss a").format(this);
   String get toTimeWithOutSecond => DateFormat("HH:mm a").format(this);
