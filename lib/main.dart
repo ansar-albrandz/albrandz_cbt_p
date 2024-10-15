@@ -1,4 +1,4 @@
-import 'package:albrandz_cbt_p/views/screens/rides/ride_map_screen.dart';
+import 'package:albrandz_cbt_p/views/screens/splash/splash_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/app_theme.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: APP_NAME,
       theme: AppTheme().getAppTheme(),
-      home:  const RideMapScreen(),
+      home:  SplashScreen(),
     );
   }
 }

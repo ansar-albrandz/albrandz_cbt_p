@@ -42,6 +42,7 @@ class AppDialogHelper {
   static showCustomBottomSheet(BuildContext context,{required Widget child,double? height}){
     var width = context.fullWidth;
     return showModalBottomSheet(
+      backgroundColor: Colors.white,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius:AppBorderRadius.only(topRight: sheetBorderRadiusSize,topLeft: sheetBorderRadiusSize)
@@ -72,4 +73,5 @@ class AppDialogHelper {
       );
     });
   }
+
 }

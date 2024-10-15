@@ -76,7 +76,7 @@ class RateDriverScreen extends StatelessWidget {
             child: ButtonWidgets().appButtonFillView(SUBMIT, onTap: () {
               // AppDialogHelper.showCustomBottomSheet(context,
               //     child: const PaymentSuccessScreen(), height: height / 2.5);
-              context.toNext(const RideMapScreen());
+              context.toNext(RideMapScreen());
             }, width: width),
           ),
           10.height,

@@ -57,6 +57,9 @@ dependencies:
   google_fonts: any
   url_launcher: any
   custom_rating_bar: any
+  google_maps_flutter: ^2.9.0
+  location: any
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:

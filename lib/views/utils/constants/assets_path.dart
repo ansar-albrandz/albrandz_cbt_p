@@ -55,6 +55,11 @@ const homeIcon = "assets/icons/home address.svg";
 const shareIcon = "assets/icons/drawers/share.svg";
 const settingsIcon = "assets/icons/drawers/settings.svg";
 const switchOffOnIcon = "assets/icons/drawers/switch_off_on.svg";
+const currentLocationIconPng = "assets/icons/current_location.png";
+const currentLocationIconSvg = "assets/icons/current_location.svg";
+const goToCurrentLocationIcon = "assets/icons/goto_current_location.svg";
+const destinationIconPng = "assets/icons/destination_icon.png";
+const pickupIconPng = "assets/icons/pickup_icon.png";
 // drawers
 const aboutUsIcon = "assets/icons/drawers/about_us.svg";
 const contactUsIcon = "assets/icons/drawers/contact_us.svg";

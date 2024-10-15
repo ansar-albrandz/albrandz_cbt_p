@@ -41,7 +41,7 @@ class TextFiledWidgets {
           counterText: counterText,
           prefixIcon: Padding(
             padding: const EdgeInsets.all(10),
-            child: AppImageView().assetSVGImageView(prefixIcon,),
+            child: AppImageView().assetSVGImageView(prefixIcon,size: appIconSize),
           ),
           contentPadding: EdgeInsets.zero),
     );
