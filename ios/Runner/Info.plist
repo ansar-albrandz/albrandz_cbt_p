@@ -35,6 +35,12 @@
     <string>This app needs access to your location to function properly.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>This app requires continuous access to your location.</string>
+    <key>NSLocationWhenInUseUsageDescription</key> <string>App requires location access for route calculation.</string> <key>NSLocationAlwaysUsageDescription</key>
+    <string>App requires continuous access to your location for route calculation.</string> <key>NSLocationAlwaysAndWhenInUseUsageDescription</key> <string>App requires location access for routing.</string> <key>UIBackgroundModes</key>
+    <array>
+    <string>location</string> </array>
+    <key>GMSApiKey</key>
+    <string>AIzaSyA1bL9RQecZMr-Tv4tegqZOxTGRz7f8CJM</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

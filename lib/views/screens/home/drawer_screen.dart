@@ -1,5 +1,6 @@
 import 'package:albrandz_cbt_p/controllers/app/app_info_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
+import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/about/about_us_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/contact_us/contact_us_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/history/ride_history_screen.dart';
@@ -35,12 +36,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   final _appInfoController = Get.put(AppInfoController());
   final _profileController = Get.put(ProfileController());
+  final _rideMapController = Get.put(RideMapController());
 
   @override
   void initState() {
     super.initState();
     _profileController.getProfile();
     _profileController.getProfilePicture();
+    _rideMapController.showCurrentMarker();
   }
 
   @override

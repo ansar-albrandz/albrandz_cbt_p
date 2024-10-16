@@ -1,5 +1,6 @@
-import 'package:albrandz_cbt_p/controllers/services/map_services.dart';
+import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/rides/cab_selection_screen.dart';
+import 'package:albrandz_cbt_p/views/screens/rides/search/search_ride_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/rides/widgets/ride_map_widgets.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
@@ -13,7 +14,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class RideMapScreen extends StatelessWidget {
   RideMapScreen({super.key});
 
-  final mapServiceController = Get.put(MapServices());
+  final mapServiceController = Get.put(RideMapController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,23 +36,13 @@ class RideMapScreen extends StatelessWidget {
                 zoomControlsEnabled: false,
                 zoomGesturesEnabled: true,
                 markers: mapServiceController.markers.value,
+                polylines: mapServiceController.polylines.value,
               )),
           Positioned(
               top: horizontalPadding + horizontalPadding,
               right: horizontalPadding,
               left: horizontalPadding,
-              child: Obx(() => view.searchRideView(
-                      mapServiceController.searchPickupController.value,
-                      mapServiceController.searchDestinationController.value,
-                      onDestinationTap: () async {
-                    await mapServiceController.animateDestinationPosition(
-                        mapServiceController
-                            .searchDestinationController.value.text);
-                  },onPickupTap: ()async{
-                await mapServiceController.animatePickupPosition(
-                    mapServiceController
-                        .searchPickupController.value.text);
-              }))),
+              child: SearchRideScreen()),
           Positioned(
               bottom: height / 8,
               right: horizontalPadding,

@@ -116,3 +116,6 @@ const TAX = "Tax";
 
 const cancelReasons  = ["Change of plan","Change of plan","Traffic Jam","Driver's not appropriate"];
 
+// map
+const mapKey = "AIzaSyA1bL9RQecZMr-Tv4tegqZOxTGRz7f8CJM";
+

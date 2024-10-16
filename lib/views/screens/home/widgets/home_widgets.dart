@@ -1,4 +1,5 @@
 import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
+import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/utils/borders/app_border_radius.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
@@ -36,7 +37,7 @@ class HomeWidgets {
             ),
             onTap: onTap),
         const Divider(
-          thickness: .5,
+          thickness: .2,
           indent: 15,
           endIndent: 25,
           height: 1,
@@ -46,16 +47,17 @@ class HomeWidgets {
   }
 
   Widget searchView({void Function(String)? onChanged,void Function()? onSuffixTap}) {
+    var mapController = Get.put(RideMapController());
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: AppBorderRadius.all()
       ),
-      child: TextFiledWidgets().appTextFieldView(TextEditingController(),
+      child: Obx(()=>TextFiledWidgets().appTextFieldView(mapController.searchPickupController.value,
           prefixIcon: searchIcon,
           onChanged: onChanged,
           hintText: "Where to go...",
           onSuffixTap: onSuffixTap,
-          suffixIcon: Icons.arrow_forward),
+          suffixIcon: Icons.arrow_forward)),
     );
   }
 

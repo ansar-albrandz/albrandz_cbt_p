@@ -19,3 +19,6 @@ const otpFieldWidth = 50.0;
 const defaultHeightOfButton = 50.0;
 const appLogoSize = 100.0;
 const profileImageSize = 100.0;
+
+// map
+const polylineWidth = 4;
