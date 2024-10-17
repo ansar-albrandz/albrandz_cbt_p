@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -40,10 +42,10 @@ class LocationHelper {
   }
 
   /// get address from position
-  Future<geocoding.Placemark>getAddressFromLatLang(LatLng position)async{
-    var data = await geocoding.placemarkFromCoordinates(position.latitude, position.longitude);
-    return data.first;
-  }
+  // Future<geocoding.Placemark>getAddressFromLatLang(LatLng position)async{
+  //   var data = await geocoding.placemarkFromCoordinates(position.latitude, position.longitude);
+  //   return data.first;
+  // }
 
   /// get position from address
   Future<geocoding.Location>positionFromAddress({required String address})async{
@@ -148,6 +150,30 @@ class LocationHelper {
         cos(lat1) * cos(lat2) * pow(sin(dLon / 2), 2);
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return R * c; // Distance in meters
+  }
+
+  Future<String> getAddressFromLatLng(double lat, double lng) async {
+    String url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$mapKey';
+
+    try {
+      var response = await Dio().get(url);
+
+      if (response.statusCode == 200) {
+        var json = response.data;
+
+        if (json['results'].isNotEmpty) {
+          String formattedAddress = json['results'][0]['formatted_address'];
+          return formattedAddress;
+        } else {
+          return "No address found";
+        }
+      } else {
+        return "Failed to get address";
+      }
+    } catch (e) {
+      return "Error: $e";
+    }
   }
 
 

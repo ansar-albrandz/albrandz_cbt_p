@@ -1,4 +1,3 @@
-import 'package:albrandz_cbt_p/views/screens/home/drawer_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/splash/splash_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/app_theme.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';

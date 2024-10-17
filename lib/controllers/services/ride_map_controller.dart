@@ -54,8 +54,9 @@ class RideMapController extends GetxController {
   /// get address from position
   var currentAddress = "".obs;
   Future<void> getCurrentAddress(LatLng position) async {
-    var data = await LocationHelper().getAddressFromLatLang(position);
-    currentAddress.value = "${data.street},${data.locality},${data.country}";
+    var address = await LocationHelper().getAddressFromLatLng(position.latitude,position.longitude);
+    // currentAddress.value = "${data.street},${data.locality},${data.country}";
+    currentAddress.value = address;
     searchPickupController.value =
         TextEditingController(text: currentAddress.value);
   }
@@ -226,6 +227,7 @@ class RideMapController extends GetxController {
     };
   }
 
+  /// fit all markers
   void _fitMarkers() async{
     LatLngBounds bounds;
     LatLng southwest = pickupPosition.value;
@@ -247,7 +249,13 @@ class RideMapController extends GetxController {
 
     bounds = LatLngBounds(southwest: southwest, northeast: northeast);
     var map = await mapController.future;
-    map.animateCamera(CameraUpdate.newLatLngBounds(bounds, horizontalPadding*5));
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await map.animateCamera(
+        CameraUpdate.newLatLngBounds(
+          bounds,
+          (60),
+        ),
+      );
+    });
   }
-
 }

@@ -1,9 +1,13 @@
 import 'package:albrandz_cbt_p/controllers/rides/places_controller.dart';
 import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/utils/borders/app_border_radius.dart';
+import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
+import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/int_extensions.dart';
+import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,18 +31,18 @@ class SearchRideScreen extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: verticalPadding),
                 child: AppImageView()
-                    .assetSVGImageView(startToEndThreeRideIcon, size: 60),
+                    .assetSVGImageView(startToEndThreeRideIcon, size: 70),
               ),
               Expanded(
                   child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Obx(() => Column(
                       children: [
                         searchFieldView(
                             mapServiceController.searchPickupController.value,
-                            hintText: "Pickup location",
+                            hintText: PICKUP,
                             onChanged: (searchText) {
                           placesController.fetchPickupPlaces(searchText);
                         }, prefixIcon: Icons.my_location),
@@ -47,7 +51,7 @@ class SearchRideScreen extends StatelessWidget {
                             mapServiceController.searchDestinationController
                                 .value, onChanged: (searchText) {
                           placesController.fetchDestinationPlaces(searchText);
-                        }, hintText: "Destination"),
+                        }, hintText: DESTINATION),
                       ],
                     )),
               ))
@@ -129,20 +133,23 @@ class SearchRideScreen extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         onChanged: onChanged,
+        style: AppTextStyle.normalBlack(),
         decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-            hintText: hintText,
-            prefixIcon: Icon(prefixIcon),
-            suffixIcon: InkWell(
-                onTap: () {
-                  controller.clear();
-                },
-                child: const Icon(Icons.clear)),
-            border: OutlineInputBorder(
-              borderRadius: AppBorderRadius.all(),
-              borderSide: const BorderSide(width: 1, color: Colors.grey),
-            )),
+          fillColor: Colors.white,
+          filled: true,
+          hintText: hintText,
+          hintStyle: AppTextStyle.normalBlack(),
+          prefixIcon: Icon(prefixIcon),
+          suffixIcon: InkWell(
+              onTap: () {
+                controller.clear();
+              },
+              child:  const Icon(Icons.clear,color: semiBoldBlackTextColor,size: appIconSize-5,)),
+          border: OutlineInputBorder(
+            borderRadius: AppBorderRadius.all(),
+            borderSide: const BorderSide(width: .3, color: semiBoldBlackTextColor),
+          ),
+        ),
       ),
     );
   }

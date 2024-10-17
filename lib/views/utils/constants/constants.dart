@@ -59,6 +59,8 @@ const FORGET_PIN = "Forgot PIN";
 const LOGOUT_MESSAGE = "Are you sure? Do you want to logout now?";
 const LET_GET_RIDES = "Let's get rides";
 const REMEMBER_LOGIN = "Remember Login";
+const PICKUP = "Pickup";
+const DESTINATION = "Destination";
 const CREATE_PROFILE_SUCCESS_MESSAGE = "Your Profile has been created successfully!";
 // country code
 
