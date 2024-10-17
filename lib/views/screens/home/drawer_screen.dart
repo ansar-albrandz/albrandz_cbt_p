@@ -1,6 +1,6 @@
 import 'package:albrandz_cbt_p/controllers/app/app_info_controller.dart';
 import 'package:albrandz_cbt_p/controllers/profile/profile_controller.dart';
-import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
+import 'package:albrandz_cbt_p/controllers/rides/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/about/about_us_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/contact_us/contact_us_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/history/ride_history_screen.dart';

@@ -41,6 +41,11 @@
     <string>location</string> </array>
     <key>GMSApiKey</key>
     <string>AIzaSyA1bL9RQecZMr-Tv4tegqZOxTGRz7f8CJM</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Scan your card to add it automatically</string>
+    <key>NSCameraUsageDescription
+    &lt;string&gt;To scan cards&lt;/string&gt;</key>
+    <string>To scan cards</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

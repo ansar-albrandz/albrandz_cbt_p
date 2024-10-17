@@ -1,94 +1,124 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-Future<void> main() async {
+import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:http/http.dart' as http;
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey =
+  'pk_test_51O80SLF4FJphZgnC5PfLZfJOQuJEopmiAIhgqJv7oaUwcdUIj1grgy7Ncx2eGHXxO8K8R3Arq6WJUCbhdyP6nV7k0023id8CuE';
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      home: StripePaymentScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class StripePaymentScreen extends StatefulWidget {
+  const StripePaymentScreen({super.key});
+
+  @override
+  State<StripePaymentScreen> createState() => _StripePaymentScreenState();
+}
+
+class _StripePaymentScreenState extends State<StripePaymentScreen> {
+  Map<String, dynamic>? paymentIntent;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child: IconButton(
-                  icon: const Icon(Icons.star),
-                  onPressed: () {
-                    showGeneralDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      transitionDuration: Duration(milliseconds: 500),
-                      barrierLabel:
-                      MaterialLocalizations.of(context).dialogLabel,
-                      barrierColor: Colors.black.withOpacity(0.5),
-                      pageBuilder: (context, _, __) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              color: Colors.white,
-                              child: Card(
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Text('Item 1'),
-                                      onTap: () =>
-                                          Navigator.of(context).pop('item1'),
-                                    ),
-                                    ListTile(
-                                      title: Text('Item 2'),
-                                      onTap: () =>
-                                          Navigator.of(context).pop('item2'),
-                                    ),
-                                    ListTile(
-                                      title: Text('Item 3'),
-                                      onTap: () =>
-                                          Navigator.of(context).pop('item3'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                      transitionBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        return SlideTransition(
-                          position: CurvedAnimation(
-                            parent: animation,
-                            curve: Curves.easeOut,
-                          ).drive(Tween<Offset>(
-                            begin: Offset(0, -1.0),
-                            end: Offset.zero,
-                          )),
-                          child: child,
-                        );
-                      },
-                    );
-                  }),
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('Stripe Payment'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('Make Payment'),
+          onPressed: () async {
+            await makePayment();
+          },
+        ),
       ),
     );
+  }
+
+  Future<void> makePayment() async {
+    try {
+      paymentIntent = await createPaymentIntent('100', 'INR');
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          paymentIntentClientSecret: paymentIntent!['client_secret'],
+          googlePay: const PaymentSheetGooglePay(
+              testEnv: true,
+              currencyCode: "INR",
+              merchantCountryCode: "IN"),
+          // Merchant Name
+          merchantDisplayName: 'Flutterwings',
+          // return URl if you want to add
+          // returnURL: 'flutterstripe://redirect',
+        ),
+      );
+      displayPaymentSheet();
+    } catch (e) {
+      print("exception $e");
+
+      if (e is StripeConfigException) {
+        print("Stripe exception ${e.message}");
+      } else {
+        print("exception $e");
+      }
+    }
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Paid successfully")),
+      );
+      paymentIntent = null;
+    } on StripeException catch (e) {
+      print('Error: $e');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text(" Payment Cancelled")),
+      );
+    } catch (e) {
+      print("Error in displaying");
+      print('$e');
+    }
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': ((int.parse(amount)) * 100).toString(),
+        'currency': currency,
+        'payment_method_types[]': 'card',
+      };
+      var secretKey =
+          "sk_test_51O80SLF4FJphZgnCtWOjGDX2JdWg1KSe8PQ0gadp6roG7X4ck4m0ZwKzl1Y1lvoqfMM1xEINzgSG51sQP6poTGtM00hAAzDciv";
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        headers: {
+          'Authorization': 'Bearer $secretKey',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body,
+      );
+      print('Payment Intent Body: ${response.body.toString()}');
+      return jsonDecode(response.body.toString());
+    } catch (err) {
+      print('Error charging user: ${err.toString()}');
+    }
   }
 }

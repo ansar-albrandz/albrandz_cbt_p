@@ -1,4 +1,4 @@
-import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
+import 'package:albrandz_cbt_p/controllers/rides/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/rides/cab_selection_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/rides/search/search_ride_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/rides/widgets/ride_map_widgets.dart';

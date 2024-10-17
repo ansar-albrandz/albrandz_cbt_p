@@ -1,4 +1,4 @@
-import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
+import 'package:albrandz_cbt_p/controllers/rides/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/utils/borders/app_border_radius.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/assets_path.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';

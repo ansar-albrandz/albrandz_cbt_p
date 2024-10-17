@@ -2,9 +2,11 @@ import 'package:albrandz_cbt_p/views/screens/splash/splash_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/app_theme.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
 void main() {
+  Stripe.publishableKey = publishableKey;
   runApp(const MyApp());
 }
 

@@ -102,7 +102,7 @@ class RideDriverDetailsScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
                   child: ButtonWidgets().appButtonFillView(OK,onTap: (){
-                    AppDialogHelper.showCustomBottomSheet(context, child: const RideCompletedScreen(),height: height/2);
+                    AppDialogHelper.showCustomBottomSheet(context, child:  RideCompletedScreen(),height: height/2);
                   },width: width/2.5),
                 )
               ],

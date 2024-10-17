@@ -1,3 +1,4 @@
+import 'package:albrandz_cbt_p/controllers/payment/stripe_payment_controller.dart';
 import 'package:albrandz_cbt_p/views/screens/card/add_card_screen.dart';
 import 'package:albrandz_cbt_p/views/screens/profile/widgets/profile_view_widgets.dart';
 import 'package:albrandz_cbt_p/views/screens/rides/payment_success_screen.dart';
@@ -12,9 +13,12 @@ import 'package:albrandz_cbt_p/views/utils/styles/app_text_style.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/app_image_view.dart';
 import 'package:albrandz_cbt_p/views/utils/widgets/button_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RideCompletedScreen extends StatelessWidget {
-  const RideCompletedScreen({super.key});
+   RideCompletedScreen({super.key});
+  
+  var paymentController = Get.put(StripePaymentController());
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +106,12 @@ class RideCompletedScreen extends StatelessWidget {
             20.height,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
-              child: ButtonWidgets().appButtonFillView(PAY,onTap: (){
+              child: ButtonWidgets().appButtonFillView(PAY,onTap: ()async{
                 // context.toNext(const DrawerScreen());
-                AppDialogHelper.showCustomBottomSheet(context, child: const PaymentSuccessScreen(),height: height/2.5);
+                await paymentController.makePayment(amount: "100", currency: "INR");
+                await paymentController.onPaymentSuccess((){
+                  AppDialogHelper.showCustomBottomSheet(context, child: const PaymentSuccessScreen(),height: height/2.5);
+                });
 
               },width: width),
             )

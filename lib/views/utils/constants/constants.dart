@@ -1,4 +1,3 @@
-
 const APP_NAME = "Cabo Cab";
 const resendOTPWaitingTime = 5;
 
@@ -18,8 +17,8 @@ const SUBMIT = "Submit";
 const NEXT = "Next";
 const DONE = "Done";
 const FROM = "From";
-const SURE  = "Sure";
-const CANCEL  = "Cancel";
+const SURE = "Sure";
+const CANCEL = "Cancel";
 const NOT_NOW = "Not Now";
 const TO = "To";
 const YES = "Yes";
@@ -61,7 +60,8 @@ const LET_GET_RIDES = "Let's get rides";
 const REMEMBER_LOGIN = "Remember Login";
 const PICKUP = "Pickup";
 const DESTINATION = "Destination";
-const CREATE_PROFILE_SUCCESS_MESSAGE = "Your Profile has been created successfully!";
+const CREATE_PROFILE_SUCCESS_MESSAGE =
+    "Your Profile has been created successfully!";
 // country code
 
 const INITAL_COUNTRY_CODE = "+91";
@@ -87,7 +87,6 @@ const ABOUTE_US = 'About Us';
 const SHARE = 'Share';
 const APP_VERSION = 'Version';
 const SUGGESTIONS = 'Suggestions';
-
 
 // text fields
 const PIN_INPUT = "Enter your PIN";
@@ -116,8 +115,16 @@ const EXTRA_FARE = "Extra Fare";
 const TOTAL_PAY = "Total Pay";
 const TAX = "Tax";
 
-const cancelReasons  = ["Change of plan","Change of plan","Traffic Jam","Driver's not appropriate"];
+const cancelReasons = [
+  "Change of plan",
+  "Change of plan",
+  "Traffic Jam",
+  "Driver's not appropriate"
+];
 
 // map
 const mapKey = "AIzaSyA1bL9RQecZMr-Tv4tegqZOxTGRz7f8CJM";
-
+const publishableKey =
+    'pk_test_51O80SLF4FJphZgnC5PfLZfJOQuJEopmiAIhgqJv7oaUwcdUIj1grgy7Ncx2eGHXxO8K8R3Arq6WJUCbhdyP6nV7k0023id8CuE';
+const stripeSecretKey =
+    "sk_test_51O80SLF4FJphZgnCtWOjGDX2JdWg1KSe8PQ0gadp6roG7X4ck4m0ZwKzl1Y1lvoqfMM1xEINzgSG51sQP6poTGtM00hAAzDciv";

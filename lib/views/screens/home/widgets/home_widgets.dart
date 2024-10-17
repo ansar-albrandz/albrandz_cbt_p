@@ -1,5 +1,5 @@
 import 'package:albrandz_cbt_p/controllers/auth/auth_controller.dart';
-import 'package:albrandz_cbt_p/controllers/services/ride_map_controller.dart';
+import 'package:albrandz_cbt_p/controllers/rides/ride_map_controller.dart';
 import 'package:albrandz_cbt_p/views/utils/borders/app_border_radius.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
 import 'package:albrandz_cbt_p/views/utils/extensions/context_extensions.dart';
