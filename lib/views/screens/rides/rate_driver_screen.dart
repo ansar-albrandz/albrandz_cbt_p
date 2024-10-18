@@ -1,4 +1,4 @@
-import 'package:albrandz_cbt_p/views/screens/rides/ride_map_screen.dart';
+import 'package:albrandz_cbt_p/views/screens/home/drawer_screen.dart';
 import 'package:albrandz_cbt_p/views/utils/colors.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/constants.dart';
 import 'package:albrandz_cbt_p/views/utils/constants/size_constants.dart';
@@ -74,9 +74,7 @@ class RateDriverScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: horizontalPadding, vertical: verticalPadding),
             child: ButtonWidgets().appButtonFillView(SUBMIT, onTap: () {
-              // AppDialogHelper.showCustomBottomSheet(context,
-              //     child: const PaymentSuccessScreen(), height: height / 2.5);
-              context.toNext(RideMapScreen());
+              context.toNext(const DrawerScreen());
             }, width: width),
           ),
           10.height,

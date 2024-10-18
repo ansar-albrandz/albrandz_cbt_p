@@ -48,3 +48,45 @@ class PaymentSuccessScreen extends StatelessWidget {
     );
   }
 }
+
+class PaymentFailureScreen extends StatelessWidget {
+  const PaymentFailureScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var width = context.fullWidth;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Text("Payment Failed",style: AppTextStyle.boldBlack(color: Colors.red),),
+          10.height,
+          const Divider(thickness: defaultBorderWidth,height: 1,),
+          5.height,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Column(
+              children: [
+                20.height,
+                Center(
+                  child:  Text("\$ 100.00",style: AppTextStyle.boldBlack(textSize: boldTextSize,color: Colors.green),),
+                ),
+                30.height,
+                const Icon(Icons.clear,color: Colors.red,size: 60,),
+                10.height,
+                const Text("\$ 100 try to deduct but failed"),
+                30.height,
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: horizontalPadding,vertical: verticalPadding),
+            child: ButtonWidgets().appButtonFillView("Repay",onTap: (){
+              context.onBackPressed;
+            },width: width),
+          )
+        ],
+      ),
+    );
+  }
+}
+
